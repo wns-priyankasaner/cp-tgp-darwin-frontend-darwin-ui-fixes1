@@ -1,0 +1,137 @@
+<div class="skill-managment-container">
+  <app-loading-spinner [isLoading]="isLoading"></app-loading-spinner>
+    <div class="grid_container">
+    <h2 class="grid_container_title_header"><u>Skill Set Mapping</u></h2>
+    <mat-grid-list cols="4" rowHeight="100px">
+      <mat-grid-tile class="filter">
+        <div class="form_wrapper">
+          <div class="title">Employee Name:</div>
+          <div class="form-field-container">
+            <mat-select placeholder="Select Employee" [(ngModel)]="employeeId" name="employeeId">
+              <input style="width: 95%; height: 30px;" (keyup)="filterEmployee($event) ">
+              <mat-option *ngFor="let employee of filteredEmployees" [value]="employee.email">
+                {{ employee.name }}-{{ employee.email }}
+              </mat-option>
+            </mat-select>
+          </div>
+        </div>
+
+      </mat-grid-tile>
+      <mat-grid-tile class="filter">
+        <div class="form_wrapper">
+          <div class="title">Select Email Inbox:</div>
+          <div class="form-field-container">
+            <mat-select placeholder="Select Email Inbox" [(ngModel)]="emailInbox" multiple name="emailInbox">
+              <mat-option #allSelected (click)="selectAllCategory()" [value]="0">Select All</mat-option>
+              <mat-option (click)="selectCategory()" *ngFor="let Category of categories" [value]="Category.id">
+                {{ Category.name }}
+              </mat-option>
+            </mat-select>
+          </div>
+        </div>
+
+      </mat-grid-tile>
+
+      <mat-grid-tile class="filter">
+        <div class="form_wrapper">
+          <div class="title">Select Email Inbox Category:</div>
+          <div class="form-field-container">
+            <mat-select placeholder="Select Email Inbox Category" [(ngModel)]="emailInboxCategory" multiple
+              name="emailInboxCategory">
+              <mat-option #allSubCatSelected (click)="selectAllSubCategory()" [value]="0">Select All</mat-option>
+              <mat-option (click)="selectSubCategory()" *ngFor="let subcategory of subcategories"
+                [value]="subcategory.id">
+                {{ subcategory.subcategory }}
+              </mat-option>
+            </mat-select>
+
+          </div>
+        </div>
+
+      </mat-grid-tile>
+
+      <mat-grid-tile class="filter">
+        <div class="form_wrapper">
+          <div class="form-field-container">
+            <div class="addSkillSet">
+              <button type="submit" md-button class="my-button" (click)="addSkillSet()">Add SkillSet</button>
+            </div>
+          </div>
+        </div>
+      </mat-grid-tile>
+
+    </mat-grid-list>
+  </div>
+  <div class="grid_container" style="padding:25px;">
+    <div class="label_totalRecord">
+      <span>Total Record:10</span>
+    </div>
+    <!-- <div style="width:20%; float: right;">
+      <mat-form-field appearance="outline" class="demo" >
+        <input matInput placeholder="Search by....." type="search" style="height:15px;">
+        <mat-icon matSuffix class="search-button" (click)="onSearch($event)">
+          search
+        </mat-icon>
+      </mat-form-field>
+    </div> -->
+    <div class="searchBar_wrapper">        
+        <input matInput placeholder="Search by....." type="search" >
+        <mat-icon matSuffix class="search-button" (click)="onSearch($event)" style="margin-top: 15px;">
+          search
+        </mat-icon>       
+    </div>
+
+    <div style="border-bottom: 1px solid #73879C">
+      <table mat-table [dataSource]="activePageDataChunk">
+
+        <!--- Note that these columns can be defined in any order.
+The actual rendered columns are set as a property on the row definition" -->
+
+        <!-- user name Column -->
+        <ng-container matColumnDef="UserName">
+          <th mat-header-cell *matHeaderCellDef> UserName </th>
+          <td mat-cell *matCellDef="let element"> {{element.userName}} </td>
+        </ng-container>
+
+        <!-- useremail Column -->
+        <ng-container matColumnDef="UserEmail">
+          <th mat-header-cell *matHeaderCellDef> UserEmail </th>
+          <td mat-cell *matCellDef="let element"> {{element.userEmail}} </td>
+        </ng-container>
+        <!-- useremail Column -->
+        <ng-container matColumnDef="Category">
+          <th mat-header-cell *matHeaderCellDef> Email Inbox </th>
+          <td mat-cell *matCellDef="let element"> {{element.category}} </td>
+        </ng-container>
+        <!-- useremail Column -->
+        <ng-container matColumnDef="Subcategories">
+          <th mat-header-cell *matHeaderCellDef> Mapped Email Inbox Category </th>
+          <td mat-cell *matCellDef="let element"> {{element.subcategories}} </td>
+        </ng-container>
+
+        <!-- Delete Column -->
+        <ng-container matColumnDef="deleteEmployee">
+          <th mat-header-cell *matHeaderCellDef> Delete </th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-icon-button color="primary" (click)="deleteSkill(element.skillId)">
+
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+
+
+      </table>
+    </div>
+    <mat-paginator showFirstLastButtons [length]="dataSource.length" [pageSize]="pageSize"
+      [pageSizeOptions]="pageSizeOptions" [pageIndex]="pageIndex" (page)="onPageChanged($event)">
+    </mat-paginator>
+  </div>
+
+
+</div>

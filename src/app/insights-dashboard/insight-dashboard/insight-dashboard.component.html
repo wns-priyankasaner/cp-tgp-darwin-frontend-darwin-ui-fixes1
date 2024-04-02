@@ -1,0 +1,88 @@
+<mat-grid-list cols="4" rowHeight="100px" class="filter">
+  <app-loading-spinner [isLoading]="isLoading"></app-loading-spinner>
+  <mat-grid-tile class="filter">
+    <div class="formfield">
+      <mat-label>Select Email Inbox</mat-label>
+      <mat-select [(ngModel)]="emailInbox" name="emailInbox"
+              (selectionChange)="emailInboxChange($event.value)">
+              <mat-option [value]="0">All</mat-option>
+              <mat-option *ngFor="let Category of categories" [value]="Category.id">
+
+                  {{ Category.name }}
+
+
+              </mat-option>
+          </mat-select>
+    </div>
+</mat-grid-tile>
+
+  
+  <mat-grid-tile>
+    <div class="formfield">
+
+      <mat-label>Select Email Inbox Category</mat-label>
+
+      <mat-select [(ngModel)]="emailInboxCategory" name="emailInboxCategory"
+        (selectionChange)="emailInboxCategoryChange()">
+        <mat-option value="0"> All</mat-option>
+        <mat-option *ngFor="let subcategory of subcategories" [value]="subcategory.id">
+
+          {{ subcategory.subcategory }}
+
+        </mat-option>
+      </mat-select>
+
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile colspan="1">
+    <div class="formfield">
+      <mat-label>-Month-</mat-label>
+      <mat-select [(ngModel)]="month" name="emailSentMonth" (ngModelChange)="onFilterChange()">
+        <mat-option disabled="disabled">-Month-</mat-option>
+        <mat-option *ngFor="let monthOption of months; let i = index" [value]="i + 1">{{ monthOption }}</mat-option>
+      </mat-select>
+    </div>
+
+  </mat-grid-tile>
+  <mat-grid-tile colspan="1">
+    <div class="formfield">
+      <mat-label>-Year-</mat-label>
+      <mat-select [(ngModel)]="year" name="emailSentYear" (ngModelChange)="onFilterChange()">
+        <mat-option disabled="disabled">-Year-</mat-option>
+        <mat-option *ngFor="let yearOption of getYearRange()" [value]="yearOption">{{ yearOption }}</mat-option>
+      </mat-select>
+    </div>
+  </mat-grid-tile>
+</mat-grid-list>
+<div id="contctType" class="insightgraphs">
+  <div class="chart-container">
+    <highcharts-chart [Highcharts]="Highcharts" [options]="chartOptions"
+    class="highchart-graph"></highcharts-chart>
+  </div>
+</div>
+<div></div>
+<div id="topcustomer" class="insightgraphs">
+  <div class="chart-container">
+    <highcharts-chart [Highcharts]="Highcharts" [options]="chartOptionsTopCustomer"
+    class="highchart-graph"></highcharts-chart>
+  </div>
+</div>
+<div id="emailreceivedinbox" class="insightgraphs">
+  <div class="chart-container">
+    <highcharts-chart [Highcharts]="Highcharts" [options]="chartOptionsEmailreceived"
+    class="highchart-graph"></highcharts-chart>
+  </div>
+</div>
+
+<div id="averagedays" class="insightgraphs">
+  <div class="chart-container">
+    <highcharts-chart [Highcharts]="Highcharts" [options]="chartOptionsAverageDays"
+    class="highchart-graph"></highcharts-chart>
+  </div>
+</div>
+<div id="emailSentimentsChart" class="insightgraphs">
+  <div class="chart-container">
+    <highcharts-chart [Highcharts]="Highcharts" [options]="chartOptionsSentiment"
+    class="highchart-graph"></highcharts-chart>
+  </div>
+</div>

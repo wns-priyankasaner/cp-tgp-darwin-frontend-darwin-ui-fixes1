@@ -1,0 +1,92 @@
+trigger:
+  - manual
+  
+pr: none
+
+pool: WNS
+
+variables:
+  imageName: $(image-name)
+  dockerfile: "$(Build.SourcesDirectory)/Dockerfile"
+  DOCKER_BUILDKIT: 1
+
+parameters:
+  - name: buildordeploy
+    displayName: Please choose the following option.
+    type: string
+    default: Build_push_And_Deploy
+    values:
+      - Build_push_And_Deploy
+      - Build_push
+      - Deploy
+  
+  - name: image_tag
+    displayName: Please provide the tag.
+    type: string
+    default: v0.0.1
+
+stages:
+  - stage: Build
+    jobs:
+    - job: BuildJob
+      steps:
+      - task: NodeTool@0
+        inputs:
+          versionSpec: '16.x'
+        displayName: 'Install Node.js'
+
+   
+      # - script: |
+      #     wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-linux.zip
+      #     unzip sonar-scanner-cli-4.6.2.2472-linux.zip
+      #     sonar-scanner-4.6.2.2472-linux/bin/sonar-scanner   -Dsonar.projectKey=skense-nxtgen-ui-dev -Dsonar.sources=src   -Dsonar.exclusions=test/**,e2e/**,node_modules/** -Dsonar.host.url=https://sonar.wnstriangenxt.com   -Dsonar.login=e60e1d150557277e3202af3949f6d6895eb715cd
+      #   displayName: 'sonar scanner'
+      
+  - stage: BuildPush
+    jobs:
+      - job: Build_Push_Deploy 
+        steps:
+          - ${{ if or(eq(parameters.buildordeploy, 'Build_push_And_Deploy'),eq(parameters.buildordeploy, 'Build_push')) }}:
+            - task: Docker@2
+              displayName: Image Build and Push
+              inputs:
+                containerRegistry: '$(container-registry)'
+                repository: '$(imageName)'
+                command: 'buildAndPush'
+                Dockerfile: '**/Dockerfile'
+                tags: '${{parameters.image_tag}}'
+
+          - ${{ if or(eq(parameters.buildordeploy, 'Build_push_And_Deploy'),eq(parameters.buildordeploy, 'Deploy')) }}:
+            - task: AzureWebAppContainer@1
+              displayName: Deploy container to web app
+              inputs:
+                azureSubscription: 'R&A Capabilities Dev/Test (434efab1-c4de-4afd-a996-59acbf51bf1a)'
+                appName: 'wns-darwin-ui-wa-poc-ci'
+                containers: 'wnsdarwinacrpoci.azurecr.io/$(imageName):${{parameters.image_tag}}'
+                appSettings: '
+                   -DOCKER_REGISTRY_SERVER_USERNAME "$(ACR_Name)"
+                   -DOCKER_REGISTRY_SERVER_PASSWORD "$(ACR_PASSWORD)"
+                   -DOCKER_REGISTRY_SERVER_URL "$(ACR_URL)"
+                   -DOCKER_IMAGE_NAME_TAG "$(imageName):${{parameters.image_tag}}"
+                  '
+
+  # - stage: Deploy
+  #   jobs:
+  #     - deployment: VMDeploy
+  #       displayName: "Deploy the web application"
+  #       pool: WNS
+  #       environment:
+  #         name: $(env)
+  #         resourceType: VirtualMachine
+  #       strategy:
+  #         runOnce:
+  #           deploy:
+  #             steps:
+  #               - task: CmdLine@2
+  #                 inputs:
+  #                   script: |
+  #                     whoami
+  #                      sudo -S docker rm --force darwin-ui
+  #                      sudo -S docker rmi wnsunfdanaltcsacrfc.azurecr.io/$(imageName):$(old-tag)
+  #                     #  sudo az acr login --name wnsunfdanaltcsacrfc
+  #                      sudo docker run -d -it --restart unless-stopped --name darwin-ui -p 4200:80 wnsunfdanaltcsacrfc.azurecr.io/$(imageName):$(tag)

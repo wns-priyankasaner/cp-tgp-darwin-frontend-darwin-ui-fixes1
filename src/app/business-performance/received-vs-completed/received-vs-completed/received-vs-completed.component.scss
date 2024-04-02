@@ -1,0 +1,9 @@
+.full-width-chart {
+    width: 100% !important; /* Apply !important to ensure styles are not overridden */
+    height: 400px; /* Set height as needed */
+  }
+  
+  /* Ensure the parent container stretches to 100% width */
+  .chart-container {
+    width: 100%;
+  }

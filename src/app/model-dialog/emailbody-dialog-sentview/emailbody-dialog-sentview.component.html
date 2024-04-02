@@ -1,0 +1,134 @@
+<div class="template-container">
+  <app-loading-spinner [isLoading]="isLoading"></app-loading-spinner>
+  <div class="close-icon" (click)="closeModal()">
+    <mat-icon>close</mat-icon>
+  </div>
+  <h2 mat-dialog-title style="width: 65rem;">{{ selectedAction }}</h2>
+  <div class="custom-dialog-container">
+    <div class="form-fields-container">
+      <div class="form-field-container">
+        <mat-label style="margin-right: 30px;">From</mat-label>
+        <mat-form-field class="text-input-field">
+          <input matInput placeholder="From" [(ngModel)]="fromValue">
+        </mat-form-field>
+      </div>
+      <div class="form-field-container">
+        <mat-label style="margin-right: 45px;">To</mat-label>
+        <mat-form-field class="text-input-field">
+          <input matInput placeholder="To" [(ngModel)]="toValue">
+        </mat-form-field>
+      </div>
+      <div class="form-field-container">
+        <mat-label style="margin-right: 45px;">CC</mat-label>
+        <mat-form-field class="text-input-field">
+          <input matInput placeholder="CC" [(ngModel)]="ccValue">
+        </mat-form-field>
+      </div>
+      <div class="form-field-container">
+        <mat-label style="margin-right: 17px;">Subject</mat-label>
+        <mat-form-field class="text-input-field">
+          <input matInput placeholder="Subject" [(ngModel)]="subjectValue">
+        </mat-form-field>
+      </div>
+      <div class="response-template-container" *ngIf="responseTemplateLoaded && selectedAction !== 'View Email Body'">
+        <label for="template">Response Template</label>
+        <select [(ngModel)]="templateValue" (change)="onTemplateSelectionChange()">
+          <option value="" disabled selected>-No Response Template-</option>
+          <option *ngFor="let template of responsetemplate" [value]="template.fileName">
+            {{ template.templateName }}
+          </option>
+        </select>
+      </div>
+
+      <!-- <mat-form-field style="padding-left: 70px;padding-top: 10px;width:1100px;"
+        *ngIf="selectedAction !== 'View Email Body'">
+        <textarea matInput [(ngModel)]="messageValue" rows="10" cols="50"></textarea>
+      </mat-form-field> -->
+      <div class="toolbar-container" *ngIf="selectedAction !== 'View Email Body'">
+        <div class="trix-toolbar">
+          <div class="toolbar-group">
+            <mat-icon (click)="applyTrixAttribute('bold')" matTooltip="Bold">format_bold</mat-icon>
+            <span class="toolbar-separator"></span>
+            <mat-icon (click)="applyTrixAttribute('italic')" matTooltip="Italic">format_italic</mat-icon>
+            <span class="toolbar-separator"></span>
+            <mat-icon (click)="applyTrixAttribute('strike')" matTooltip="Strikethrough">strikethrough_s</mat-icon>
+            <span class="toolbar-separator"></span>
+            <mat-icon (click)="applyTrixAttribute('link')" matTooltip="Link">link</mat-icon>
+          </div>
+          <div class="toolbar-group">
+            <mat-icon (click)="applyTrixAttribute('bullet')" matTooltip="Bullet">format_list_bulleted</mat-icon>
+            <span class="toolbar-separator"></span>
+            <mat-icon (click)="applyTrixAttribute('number')" matTooltip="Number">format_list_numbered</mat-icon>
+            <span class="toolbar-separator"></span>
+            <mat-icon (click)="applyTrixAttribute('quote')" matTooltip="Quote">format_quote</mat-icon>
+            <span class="toolbar-separator"></span>
+            <mat-icon (click)="applyTrixAttribute('code')" matTooltip="Code">code</mat-icon>
+            <span class="toolbar-separator"></span>
+            <mat-icon (click)="increaseIndent()" matTooltip="Increase Indent">format_indent_increase</mat-icon>
+            <span class="toolbar-separator"></span>
+            <mat-icon (click)="decreaseIndent()" matTooltip="Decrease Indent">format_indent_decrease</mat-icon>
+          </div>
+          <div class="toolbar-group">
+            <mat-icon (click)="undo()" matTooltip="Undo">undo</mat-icon>
+            <span class="toolbar-separator"></span>
+            <mat-icon (click)="redo()" matTooltip="Redo">redo</mat-icon>
+          </div>
+        </div>
+
+      </div>
+      <div *ngIf="selectedAction !== 'View Email Body'">
+        <trix-editor #trixEditor [(ngModel)]="messageValue" class="trix-content" spellcheck="true" lang="en"
+        style="overflow: auto; height: 200px; width: 100%; margin-top: 0;margin-left: 20px;margin-bottom: 20px;"
+        (trix-change)="handleTrixChange($event)"></trix-editor>
+      </div>
+      
+    </div>
+    <div class="body-container" style="padding-left: 15px;">
+      <div class="body-content" [innerHTML]="bodyValue"></div>
+    </div>
+    <div class="attachment-section">
+      <div style="padding-bottom: 20px; padding-left: 10px;">
+        <span>
+          <mat-icon style="vertical-align: middle;">attach_file</mat-icon>
+        </span>
+        <span>Attachment -</span>
+      </div>
+      <div class="attachment-list">
+        <span *ngFor="let attachment of attachments" style="padding-bottom: 25px;">
+          <mat-icon [ngClass]="getIconClass(attachment)" (click)="openFile(attachment.attachmentId)"
+            [matTooltip]="attachment.fileName">{{ attachment.icon }}</mat-icon>
+          <mat-icon class="delete-icon" [matTooltip]="'Delete ' + attachment.fileName"
+            (click)="deleteAttachment(attachment.attachmentId)"
+            *ngIf="selectedAction !== 'View Email Body'">clear</mat-icon>
+        </span>
+      </div>
+
+    </div>
+    <div class="attach-file-button-container" *ngIf="selectedAction !== 'View Email Body'">
+      <label style="padding-left: 15px; padding-bottom: 25px;" for="fileInput">Select Files:</label>
+      <input type="file" (change)="attachFile($event)" #fileInput multiple>
+    </div>
+
+    <!-- <div class="template-actions" *ngIf="selectedAction !== 'View Email Body'">
+      <span>Do you want to include a feedback survey?</span>
+      <mat-checkbox [(ngModel)]="isCheckedYes" (click)="onCheckboxChange('yes')">Yes</mat-checkbox>
+      <mat-checkbox [(ngModel)]="isCheckedNo" (click)="onCheckboxChange('no')">No</mat-checkbox>
+      <button mat-raised-button color="primary" (click)="sendReply()">Send</button>
+      <button mat-button (click)="closeModal()">Cancel</button>
+    </div> -->
+    <div class="template-actions" style="padding-top: 30px;"  *ngIf="selectedAction !== 'View Email Body'">
+     
+        <div class="checkboxes">
+          <span>Do you want to include a feedback survey?</span>
+        <mat-checkbox [(ngModel)]="isCheckedYes" (click)="onCheckboxChange('yes')">Yes</mat-checkbox>
+        <mat-checkbox [(ngModel)]="isCheckedNo" (click)="onCheckboxChange('no')">No</mat-checkbox>
+      </div>
+      <div class="send-button">
+        <button mat-raised-button color="primary" (click)="sendReply()">Send</button>
+      </div>
+      <div class="cancel-button">
+        <button mat-button (click)="closeModal()">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>

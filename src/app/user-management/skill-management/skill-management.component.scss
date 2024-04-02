@@ -1,0 +1,277 @@
+.mat-mdc-table tbody,
+.mat-mdc-table tfoot,
+.mat-mdc-table thead,
+//.mat-mdc-cell,
+.mat-mdc-footer-cell,
+.mat-mdc-header-row,
+//.mat-mdc-row,
+.mat-mdc-footer-row,
+.mat-mdc-table .mat-mdc-header-cell {
+  border-bottom: 1px solid #ddd;
+  background: inherit;
+
+  background-color: #337AB7;
+
+  color: white;
+
+  border-top: 0;
+
+  vertical-align: middle;
+
+  text-align: center;
+
+  border: 1px solid #ddd;
+
+  font-family: "calibri";
+
+  font-size: 15px;
+
+  margin-right: 3rem;
+
+  margin-left: 2rem;
+
+
+
+
+
+}
+
+.my-button {
+  color: white;
+  background-color: #337AB7;
+  font-size: 15px;
+  border: 2px solid #ddd;
+  padding: 10px;
+  font-family: "calibri";
+  width: 100px;
+  margin-left: 2rem;
+  border-radius: 5px;
+
+  margin-bottom: 20px;
+}
+
+
+
+.mat-mdc-cell {
+
+
+  color: #73879C;
+
+
+  border-top: 0;
+
+  vertical-align: middle;
+
+  font-family: "calibri";
+
+  font-size: 15px;
+
+  margin-right: 3rem;
+
+  margin-left: 2rem;
+
+  border: 1px solid #ddd;
+
+  padding: 8px;
+
+  line-height: 1.42857143;
+
+  vertical-align: top;
+
+  position: relative;
+
+  margin-left: 2rem;
+
+}
+
+
+
+.mat-mdc-icon-button.mat-primary {
+  --mat-mdc-button-persistent-ripple-color: brown;
+  --mat-mdc-button-ripple-color: rgba(63, 81, 181, 0.1);
+
+}
+
+.mat-mdc-icon-button.mat-primary {
+  --mdc-icon-button-icon-color: brown;
+  --mdc-icon-button-icon-background-color: white;
+  --mdc-icon-button-icon-cursor: pointer;
+}
+
+.mat-mdc-icon-button .mat-mdc-button-touch-target {
+  // position: absolute;
+  // top: 50%;
+  // height: 48px;
+  // left: 50%;
+  // width: 48px;
+  // transform: translate(-50%, -50%);
+  position: relative;
+  top: 1px;
+  display: inline-block;
+  font-family: 'Glyphicons Halflings';
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+}
+
+
+.mat-mdc-option {
+  color: #337AB7;
+  font-family: "calibri";
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.471;
+
+  &:hover {
+    color: blue;
+  }
+}
+
+.mdc-list-item {
+  white-space: normal;
+  font-size: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+  font-family: "calibri";
+  text-decoration: inherit;
+  text-transform: inherit;
+  margin-right: auto;
+  color: #73879C;
+  background-color: white;
+  background: inherit;
+
+
+
+}
+
+
+.search-bar {
+  width: 20%;
+  float: right;
+  border-radius: 20px;
+}
+
+.search-bar input {
+  width: 100%;
+}
+
+.search-bar mat-icon {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+}
+
+.mat-mdc-paginator-page-size-label {
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.labels {
+  font-size: 16px;
+  font-weight: 400;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  color: #73879C;
+}
+
+// New Code 
+app-skill-management,
+.skill-managment-container {
+  color: #73879C;
+  font-family: "calibri";
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.471;
+  margin-left: 20px;
+}
+
+.filter {
+  margin-left: 0px !important;
+}
+
+.filter .mat-grid-tile-content {
+  padding-left: 0px;
+  ;
+}
+
+.title {
+  display: block;
+
+}
+
+.form_wrapper {
+  display: block;
+  width: 90%;
+}
+
+.grid_container {
+  margin: 10px;
+  padding: 10px;
+  background-color: #FFF;
+  border: 1px solid #E6E9ED;
+  ;
+}
+
+.grid_container_title_header {
+  width: 90%;
+  margin-left: 15px;
+  margin-bottom: 5px;
+  margin-top: 10px;
+  border-bottom: 2px solid #E6E9ED;
+  padding-bottom: 10px;
+  ;
+  color: Black;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.mat-grid-list {
+  display: block;
+  position: relative;
+  padding-bottom: 21px;
+  height: 57px !important;
+}
+
+.mat-grid-tile-content {
+  margin-top: -15px !important;
+}
+
+.addSkillSet {
+  width: 10%;
+  margin-top: 37px;
+  margin-left: -41px;
+  ;
+}
+
+.addSkillSet button {
+  padding: 8px;
+}
+
+.searchBar_wrapper {
+  width: 230px;
+  float: right;
+  border: 1px solid gray;
+  border-radius: 26px;
+  padding-left: 15px;
+  display: flex;
+  margin-bottom: 15px;
+}
+
+.label_totalRecord{
+  width:20%;
+   float: left;color:black;margin-top: 10px;
+}
+
+.searchBar_wrapper input {
+  height: 30px;
+  border: none;
+  margin-bottom: 4px;
+  margin-top: 10px;
+}
+
+input:focus {
+  outline:none;
+}

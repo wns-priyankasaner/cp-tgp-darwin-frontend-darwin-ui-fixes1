@@ -1,0 +1,190 @@
+// mat-grid-tile {
+//     background: lightblue;
+//   }
+
+app-raw-data-extract,
+.example-container {
+
+  color: #73879C;
+  font-family: "calibri";
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.471;
+  margin-left: 20px;
+}
+.my-button {
+    color: white !important;
+    background-color: #337AB7 !important;
+    font-size: 15px;
+    padding: 8px;
+    font-family: "calibri";
+    width: 120px;
+   
+  }
+app-raw-data-extract{
+    .labels{
+        font-size: 16px;
+        font-weight: 400;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        color: #73879C;
+       
+    }
+
+    button{
+        background-color: #337AB7;
+        color: #fff;
+    }
+}
+
+
+.mat-mdc-form-field-infix {
+    flex: auto;
+    min-width: 0;
+    width: 234px;
+    position: relative;
+    box-sizing: border-box;
+  }
+  
+  // varun CSS
+  .mat-date-range-input {
+    display: block;
+    width: 100%;
+    line-height: 1.5;
+    border-radius: 0.2rem;
+    border: 1px solid #ced4da;
+    padding: 0.25rem 0.5rem;
+    box-sizing: border-box;
+    background: #fff;
+    position: relative;
+    //width: 80px  !important;
+  }
+  
+  .mat_title::ng-deep {
+    top: 28px !important;
+  }
+  
+  // New Css 
+  .form-field-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .form-field-container mat-label {
+    margin-right: 10px;
+  }
+  
+  .text-input-field {
+    width: 100%;
+  
+  }
+  
+  
+  .form-field-container {
+    display: flex;
+    align-items: flex-start;
+    padding: 5px 10px 5px;
+    position: relative;
+    width: 100%;
+  }
+  
+  mat-datepicker-toggle.mat-datepicker-toggle {
+    position: absolute;
+    right: 16px;
+    top: 9px;
+  }
+  
+  .mat-date-range-input-container {
+    display: block;
+    align-items: center;
+    width: 100% !important;
+    max-width: 100%;
+    flex-direction: row;
+  }
+  
+  .mat-date-range-input-wrapper {
+    position: relative;
+    overflow: hidden;
+    max-width: inherit;
+    display: inline-block;
+    width: 40%;
+    
+    background-color: #E6E9ED;
+  }
+  
+  .mat-date-range-input-wrapper input[type=text],
+  .mat-start-date,
+  .mat-end-date {
+    border: none;
+  }
+  
+  // .mat-start-date,.mat-end-date{
+  //   width: 40%;
+  // }
+  .filter.btnContainer button.search {
+    margin: 0 15px;
+  }
+  
+  .filter {
+    margin-left: 0px !important;
+  }
+  
+  .filter .mat-grid-tile-content {
+    padding-left: 0px;
+    ;
+  }
+  
+  .title {
+    display: block;
+    display: block;
+    /* padding-left: 14px; */
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: 400;
+  }
+  
+  .form_wrapper {
+    display: block;
+    width: 90%;
+  }
+  
+  .grid_container {
+    margin: 10px;
+    padding: 10px;
+    padding-left: 0px !important;
+    background-color: #FFF;
+    border: 1px solid #E6E9ED;
+    ;
+  }
+  
+  .grid_container_title_header {
+    width: 65rem;
+    margin-left: 28px;
+    margin-bottom: 5px;
+    margin-top: 10px;
+  }
+  
+  .mat-grid-list {
+    display: block;
+    position: relative;
+    padding-bottom: 21px;
+    height: 57px !important;
+  }
+  .grid_row{
+    width: 100%;
+    padding: 10px 10px 10px 20px;;
+  }
+  .grid_row hr{
+    border-top: 1px solid #E6E9ED;
+    margin-right: 26px;;
+  }
+  .matgrid_title {
+    display: block;
+    padding-left: 14px;
+    
+  }
+  .date_block_wrraper{
+    width: 100%;
+    margin-left: -33px;
+  }
+
+

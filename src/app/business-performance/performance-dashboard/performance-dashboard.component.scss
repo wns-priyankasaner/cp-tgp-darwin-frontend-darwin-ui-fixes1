@@ -1,0 +1,189 @@
+app-received-vs-completed, app-hours-bar-graph{
+  display: inline-block !important;
+  // margin-left: 3rem;
+  margin-left: 0;
+  font-size: 12px;
+  width: 100%;
+  height:100%;
+  border: 1px;
+  margin-top: 15px;
+  box-shadow:0px 0px 8px 0px lightblue;
+}
+
+app-outstanding-bar-graph, app-aht-line-graph{
+  display: inline-block !important;
+  // margin-left: 2rem;
+  font-size: 12px;
+  margin-left: 0;
+  // width: 580px;
+  width: 100%;
+  height:100%;
+  // height:200px;
+  border: 1px;
+  box-shadow:0px 0px 8px 0px lightblue;
+  margin-top: 15px;
+}
+app-sla-line-graph,app-slabreakdown-bar-graph{
+display: inline-block !important;
+margin-left: 0;
+font-size: 12px;
+width: 100%;
+height:100%;
+border: 1px;
+box-shadow:0px 0px 8px 0px lightblue;
+margin-top: 15px;
+}
+.tile-icon-title {
+display: flex;
+align-items: center;
+background-color: #00a2e5;
+height: 100%;
+width: 70px;
+}
+.tile-heading {
+  font-size: 14px;
+  margin-bottom: 4px; 
+}
+
+.tile-value {
+  font-size: 25px;
+  font-weight: bold;
+  color: #666666;
+  font-family: Calibri !important;
+}
+.mat-icon {
+  font-size: 64px; 
+  color:white; 
+}
+
+.tile-image {
+  width: 50px; 
+  height: 50px;
+ // margin-bottom: 8px; 
+  margin-left: 10px;
+ // margin-top: 5px;
+
+  
+
+  }
+
+  .outstanding{
+    margin-left: 14px;
+    margin-top: 2px;
+  }
+
+.tile-icon {
+  font-size: 61px; 
+  display: inline-flex; 
+  align-items: center;
+  justify-content: center; 
+  width: 72px; 
+  height: 72px;
+  background-color:#00a2e5; 
+  margin: -11px 0px 0px -17px;
+}
+.tile-content {
+  text-align: center;
+  font-size: 10px; 
+  margin-top: 8px;
+  margin-left: 5px;
+}
+.mat-grid-list {
+  margin-bottom: 10px;
+  margin-top: 10px; 
+  margin-left:20px;
+  margin-right:20px;
+}
+.container{
+  font-size: 14px;
+}
+.formfield{
+  height: 70px;
+  font-size: 14px;
+  margin-left:-128px;
+  width:303px;
+  margin-left:0px;
+}
+
+element.style {
+font-size: 14px;
+color: rgb(51, 51, 51);
+font-weight: bold;
+fill: rgb(51, 51, 51);
+}
+
+.mat-grid-list{
+background-color: white;
+}
+
+app-performance-dashboard{
+
+.dashboard-summary{
+background: blue($color: #000000);
+
+.mat-grid-tile-content{
+  justify-content: left !important;
+
+}
+}
+
+.mat-date-range-input-wrapper input[type=text]{border: none;}
+.filter.btnContainer button.search{
+margin: 0 15px;
+}
+.form-field-container {
+display: flex;
+align-items: center;
+margin-left:-57px;
+}
+.form-field-container {
+display: flex;
+align-items: flex-start;
+padding: 15px 10px 5px;
+position: relative;width: 100%;
+width:285px;margin-left:-55px;
+}
+
+
+
+.form-field-container mat-label {
+margin-right: 10px;
+width:285px;
+margin-left:-55px;
+}
+.performacedashboardContainer {
+font-family: "calibri";
+}
+.form-group.text-right {
+text-align: right;
+width: 100%;
+}
+.select-drp{
+width:297px;
+}
+.performancedashboard-summarypanel{
+margin-left: 5rem; 
+margin-right: 7rem;
+}
+}
+
+.listingBox {
+  overflow-x: auto; /* Enable horizontal scrolling */
+  white-space: nowrap; /* Prevent wrapping of the content */
+}
+
+.scrollable-container {
+  display: block; /* Ensure that the container shrinks to fit its content */
+}
+
+.row {
+  white-space: normal; /* Reset the white-space property for rows */
+}
+
+.column {
+  display: inline-block;box-sizing: border-box;
+  padding: 0 15px;
+  vertical-align: top; /* Align columns at the top */
+  width: 50%; /* Adjust column width as needed */
+}
+

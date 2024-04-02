@@ -1,0 +1,121 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+
+
+
+.toolbar-bg-white {
+  background-color: white;
+}
+
+mat-icon {
+  cursor: pointer;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.logo-final {
+  height: 9vh;
+}
+
+.home-page {
+  background-image: url('../assets/Images/body-bg.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 85%;
+  position: relative;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  z-index: 5000;
+
+  .powered-by {
+    margin-left: 50%;
+  }
+
+  .footer-text {
+
+
+    font-size: 14px;
+    color: #8d8d8d;
+  }
+
+  .text-right {
+    text-align: right;
+  }
+
+
+  .example-container {
+    width: 400px;
+    height: 100%;
+    margin: 10px;
+    border: 1px solid #555;
+  }
+
+
+
+}
+
+mat-sidenav-container {
+  // height: 100%;
+}
+
+mat-sidenav {
+  background-color: #1A237E;
+  width: 165px;
+}
+
+.side-menu {
+  text-align: center !important;
+  font-weight: 400;
+  font-size: 14px;
+  // padding: 10px 5px;
+  color: white;
+}
+
+.side-menu-text {
+  display: block;
+  font-size: 13px;
+}
+
+.side-menu-img {
+  text-align: center;
+  margin-top: 30px;
+}
+.custom-icon {
+  width: 20px;
+  height: 30px;
+  font-size: 30px;
+ 
+}
+
+.mat-drawer-content{
+//  height: auto;
+ //overflow-y: visible;
+}
+.mat-drawer-content {
+  position: relative;
+  z-index: 1;
+  display: block;
+  height: calc(100vh - 70px);
+  overflow: auto;
+}
+mat-sidenav{
+  background: rgb(27,52,145);
+  background: linear-gradient(90deg, rgba(27,52,145,1) 21%, rgba(31,103,202,1) 85%);
+    width: 100px;
+}
+.side-menu-img img{width: 40px;}
+.sideNavMenu {
+  position: relative;
+}
+.memberIcon{background: #f1f1f1;}
+
+
+
+

@@ -1,0 +1,324 @@
+@import '~trix/dist/trix.css';
+
+
+
+
+/* New CSS*/
+
+.mat-mdc-text-field-wrapper {
+  width: 900px;
+}
+
+.mat-mdc-checkbox.mat-accent {
+  --mdc-checkbox-selected-checkmark-color: #fff;
+  --mdc-checkbox-selected-focus-icon-color: #4090ff;
+  --mdc-checkbox-selected-hover-icon-color: #4090ff;
+  --mdc-checkbox-selected-icon-color: #4090ff;
+  --mdc-checkbox-selected-pressed-icon-color: #4090ff;
+  --mdc-checkbox-unselected-focus-icon-color: #212121;
+  --mdc-checkbox-unselected-hover-icon-color: #212121;
+  --mdc-checkbox-disabled-selected-icon-color: rgba(0, 0, 0, 0.38);
+  --mdc-checkbox-disabled-unselected-icon-color: rgba(0, 0, 0, 0.38);
+  --mdc-checkbox-unselected-icon-color: rgba(0, 0, 0, 0.54);
+  --mdc-checkbox-unselected-pressed-icon-color: rgba(0, 0, 0, 0.54);
+}
+
+.email-res {
+  display: flex;
+  align-items: center;
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+.template-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.row-container {
+  display: flex;
+}
+
+.close-icon {
+  position: fixed;
+  top: 15px;
+  right: 12%;
+  cursor: pointer;
+  z-index: 9999;
+}
+
+.excel-icon::before {
+  content: 'description';
+}
+
+.pdf-icon::before {
+  content: 'picture_as_pdf';
+}
+
+.jpeg-icon::before {
+  content: 'image';
+}
+
+.txt-icon::before {
+  content: 'description';
+}
+
+.file-icon::before {
+  content: 'insert_drive_file';
+}
+
+.attachment-list {
+  padding-left: 20px;
+}
+
+.trix-button-group,
+.trix-button--icon,
+.trix-button--icon[data-trix-attribute="bold"],
+.trix-button--icon[data-trix-attribute="italic"],
+.trix-button--icon[data-trix-attribute="strike"],
+.trix-button--icon[data-trix-attribute="link"],
+.trix-button--icon[data-trix-attribute="unlink"],
+.trix-button--icon[data-trix-attribute="bullet"],
+.trix-button--icon[data-trix-attribute="number"],
+.trix-button--icon[data-trix-attribute="quote"],
+.trix-button--icon[data-trix-attribute="code"],
+.trix-button--icon[data-trix-attribute="undo"],
+.trix-button--icon[data-trix-attribute="redo"] {
+  display: none !important;
+}
+
+.trix-toolbar .mat-icon {
+  font-size: 24px;
+  color: #000;
+  cursor: pointer;
+}
+
+.toolbar-container {
+  box-sizing: border-box;
+  //border: 1px solid #ccc; 
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  //background-color: #f9f9f9;
+  margin-left: 20px;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.trix-toolbar {
+  display: flex;
+  gap: 10px;
+
+}
+
+.toolbar-group {
+  border: 1px solid #ccc;
+  padding: 5px;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+
+.mat-icon:not(:last-child)::after {
+  content: '|';
+  margin-left: 10px;
+  /* Adjust spacing between icon and separator */
+  color: #000;
+}
+
+mat-form-field {
+  height: 60px;
+  margin-left: 40px;
+  margin: 0;
+  padding: 0;
+}
+
+mat-form-field,
+mat-label,
+input,
+textarea {
+  font-size: 14px;
+}
+
+.trix-editor {
+  font-size: 14px;
+}
+
+.form-field-container {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  padding: 0;
+}
+
+.form-field-container mat-label {
+  margin-right: 10px;
+  height: fit-content;
+}
+
+mat-label {
+  margin-left: 20px;
+}
+
+.mat-select-placeholder {
+  margin-bottom: auto;
+}
+
+.text-input-field {
+  width: 100%;
+
+}
+
+.template-actions {
+  display: flex;
+  align-items: center;
+}
+
+
+.survey-question {
+  flex: 1;
+  margin-left: 400px;
+}
+
+
+.checkboxes {
+  margin-right: 10px;
+  box-sizing: border-box;
+  border: 1px dotted #C2CDD8;
+}
+
+.send-button {
+  margin-left: 20px;
+}
+
+.cancel-button {
+  margin-left: 10px;
+}
+
+.mdc-text-field--no-label:not(.mdc-text-field--outlined):not(.mdc-text-field--textarea) .mat-mdc-form-field-infix {
+  padding-top: 9px !important;
+  padding-bottom: 9px !important;
+}
+
+
+// Varun CSS
+.custom-dialog-container {
+  height: 407px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.template-container {
+  position: relative;
+}
+
+.close-icon {
+  position: absolute;
+  top: 15px;
+  right: 5px;
+}
+
+.template-container h2.heading {
+  width: 100%;
+  color: #73879C;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: "calibri";
+  margin-bottom: 0;
+}
+
+.text-input-field .mat-mdc-select,
+.text-input-field input {
+  border: 1px solid #ccc;
+  font-size: 13px !important;
+  padding: 2px 10px;
+  width: 100%;
+  margin-bottom: 5px;
+  color: #000;
+  box-sizing: border-box;
+}
+
+.text-input-field input {
+
+  padding: 4px 10px;
+
+}
+
+.custom-dialog-container mat-label {
+  width: 91px;
+  font-size: 12px;
+  color: #73879c;
+  font-weight: 500;
+}
+
+.custom-dialog-container .toolbar-group {
+  border: 1px solid #ccc;
+  padding: 5px 5px 0;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.trix-toolbar .mat-icon {
+  font-size: 19px;
+  color: #000;
+  cursor: pointer;
+  height: auto;
+}
+
+.toolbar-container {
+  margin-left: 12px !important;
+}
+
+.custom-dialog-container trix-editor {
+  box-sizing: border-box;
+  width: 98.4% !important;
+}
+
+.template-container {
+  position: relative;
+  width: 99%;
+  box-sizing: border-box;
+}
+
+.attachementContainer {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 13px;
+  color: #34495e;
+  padding-left: 14px;
+}
+
+.attach-file-button-container {
+  padding: 3px;
+  font-size: 12px;
+}
+
+.attach-file-button-container input[type="file"] {
+  font-size: 12px;
+}
+
+.checkboxes {
+  margin-right: 0;
+  box-sizing: border-box;
+  border: 1px dotted #C2CDD8;
+  font-size: 12px;
+  padding: 0 10px;
+}
+
+.cancel-button button.cancelBtn {
+  background: #73879C !important;
+  color: #fff !important;
+  border: #73879C;
+  text-align: center;
+  margin-right: 10px;
+  letter-spacing: normal;
+}
+
+.send-button button.mat-primary.saveBtn {
+  color: #fff;
+  background-color: #337AB7;
+  border: #337AB7;
+  text-align: center;
+  letter-spacing: normal;
+}

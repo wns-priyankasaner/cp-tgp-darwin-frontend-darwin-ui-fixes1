@@ -1,0 +1,254 @@
+app-reallocate-case,
+.example-container {
+
+  color: #73879C;
+  font-family: "calibri";
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.471;
+  margin-left: 20px;
+}
+
+.mat-mdc-table tbody,
+.mat-mdc-table tfoot,
+.mat-mdc-table thead,
+//.mat-mdc-cell,
+.mat-mdc-footer-cell,
+//.mat-mdc-header-row,
+// .mat-mdc-row,
+.mat-mdc-footer-row,
+.mat-mdc-table .mat-mdc-header-cell {
+
+  background: inherit;
+
+  background-color: #337AB7;
+
+  color: white;
+
+  border-top: 0;
+
+  vertical-align: middle;
+
+  text-align: center;
+
+  border: 1px solid #ddd;
+
+  font-family: "calibri";
+
+  font-size: 15px;
+
+  margin-right: 3rem;
+
+  margin-left: 2rem;
+
+}
+
+
+.my-button {
+  color: white;
+  background-color: #337AB7;
+  font-size: 15px;
+  border: 2px solid #ddd;
+  padding: 8px;
+  font-family: "calibri";
+  width: 84px;
+  border-radius: 30px;
+  margin-left: 8px;
+  margin-top: -5px
+}
+
+// .custom-checkbox,.mat-checkbox-blue .mat-mdc-checkbox .mdc-checkbox .mdc-checkbox__native-control {
+
+//   color: #337AB7 !important;
+//   opacity: 1 !important;
+//   mdc-checkbox-selected-checkmark-color:#337AB7
+// }
+
+// .mat-mdc-checkbox .mdc-checkbox .mdc-checkbox__native-control{
+//   color: #337AB7 !important;
+//   opacity: 1 !important;
+// }
+
+.mat-mdc-checkbox.mat-accent {
+  --mdc-checkbox-selected-checkmark-color: #fff;
+  --mdc-checkbox-selected-focus-icon-color: #337AB7;
+  --mdc-checkbox-selected-hover-icon-color: #337AB7;
+  --mdc-checkbox-selected-icon-color: #337AB7;
+  --mdc-checkbox-selected-pressed-icon-color: #337AB7;
+  --mdc-checkbox-unselected-focus-icon-color: #212121;
+  --mdc-checkbox-unselected-hover-icon-color: #212121;
+  --mdc-checkbox-disabled-selected-icon-color: rgba(0, 0, 0, 0.38);
+  --mdc-checkbox-disabled-unselected-icon-color: rgba(0, 0, 0, 0.38);
+  --mdc-checkbox-unselected-icon-color: rgba(0, 0, 0, 0.54);
+  --mdc-checkbox-unselected-pressed-icon-color: rgba(0, 0, 0, 0.54);
+}
+
+.mat-mdc-cell {
+
+
+
+
+
+  border-top: 0;
+
+  vertical-align: middle;
+
+  font-family: "calibri";
+
+  font-size: 15px;
+
+  margin-right: 3rem;
+
+  margin-left: 2rem;
+
+  border: 1px solid #ddd;
+
+  padding: 8px;
+
+  line-height: 1.42857143;
+
+  vertical-align: top;
+
+  position: relative;
+
+  margin-left: 2rem;
+
+}
+
+.mat-mdc-form-field-infix {
+  flex: auto;
+  min-width: 0;
+  width: 234px;
+  position: relative;
+  box-sizing: border-box;
+}
+
+// varun CSS
+.mat-date-range-input {
+  display: block;
+  width: 100%;
+  line-height: 1.5;
+  border-radius: 0.2rem;
+  border: 1px solid #ced4da;
+  padding: 0.25rem 0.5rem;
+  box-sizing: border-box;
+  background: #fff;
+  position: relative;
+  //width: 80px  !important;
+}
+
+.mat_title::ng-deep {
+  top: 28px !important;
+}
+
+// New Css 
+.form-field-container {
+  display: flex;
+  align-items: center;
+}
+
+.form-field-container mat-label {
+  margin-right: 10px;
+}
+
+.text-input-field {
+  width: 100%;
+
+}
+
+
+.form-field-container {
+  display: flex;
+  align-items: flex-start;
+  padding: 5px 10px 5px;
+  position: relative;
+  width: 100%;
+}
+
+mat-datepicker-toggle.mat-datepicker-toggle {
+  position: absolute;
+  right: 16px;
+  top: 9px;
+}
+
+.mat-date-range-input-container {
+  display: block;
+  align-items: center;
+  width: 100% !important;
+  max-width: 100%;
+  flex-direction: row;
+}
+
+.mat-date-range-input-wrapper {
+  position: relative;
+  overflow: hidden;
+  max-width: inherit;
+  display: inline-block;
+  width: 40%;
+  
+  background-color: #E6E9ED;
+}
+
+.mat-date-range-input-wrapper input[type=text],
+.mat-start-date,
+.mat-end-date {
+  border: none;
+}
+
+// .mat-start-date,.mat-end-date{
+//   width: 40%;
+// }
+.filter.btnContainer button.search {
+  margin: 0 15px;
+}
+
+.filter {
+  margin-left: 0px !important;
+}
+
+.filter .mat-grid-tile-content {
+  padding-left: 0px;
+  ;
+}
+
+.title {
+  display: block;
+  padding-left: 14px;
+  ;
+}
+
+.form_wrapper {
+  display: block;
+  width: 90%;
+}
+
+.grid_container {
+  margin: 10px;
+  padding: 10px;
+  padding-left: 0px !important;
+  background-color: #FFF;
+  border: 1px solid #E6E9ED;
+  ;
+}
+
+.grid_container_title_header {
+  width: 65rem;
+  margin-left: 28px;
+  margin-bottom: 5px;
+  margin-top: 10px;
+}
+
+.mat-grid-list {
+  display: block;
+  position: relative;
+  padding-bottom: 21px;
+  height: 57px !important;
+}
+
+.mat-grid-tile-content {
+  margin-top: -15px !important;
+}
+
+.form-field-container .mat-date-range-input-wrapper {
+  width: 40% !important
+}

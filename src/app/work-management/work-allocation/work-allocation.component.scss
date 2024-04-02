@@ -1,0 +1,600 @@
+app-work-allocation {
+
+  font-family: "calibri";
+
+  textarea,
+  input,
+  mat-select {
+    font-family: "calibri" !important;
+  }
+
+  .frm-label {
+    color: #73879C;
+    font-size: 15px;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+  }
+
+  .sentiment {
+    color: black;
+    font-weight: bold;
+
+
+
+  }
+
+  .wm-border {
+    border: 1px solid #E6E9ED
+  }
+
+  .mat-grid-tile-content {
+    flex-direction: column;
+  }
+
+  .mat-mdc-unelevated-button[disabled]:hover {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  .button-container[disabled] mat-icon {
+    color: #ccc;
+  }
+
+
+
+  .mat-mdc-card-content:last-child {
+    padding-bottom: .5rem;
+    text-align: center;
+  }
+
+  .mat-mdc-card-content {
+    border-radius: 0px 0px 0px 0px;
+    height: 28px;
+    text-align: center;
+    font-weight: bold;
+    font-family: Calibri;
+    font-size: 16px;
+    background-color: #FAFBFD;
+    padding: 0px;
+  }
+
+  .mat-mdc-card-title {
+    border-radius: 0px 0px 0px 0px;
+    height: 28px;
+    text-align: center;
+    font-weight: bold;
+    font-family: Calibri;
+    font-size: 23px;
+
+    padding: 0px;
+  }
+
+  .card-content {
+    border-top: 1 px solid blue !important;
+  }
+
+  .action-cards {
+    justify-content: left;
+    align-items: flex-start;
+    display: contents;
+  }
+
+  .mat-grid-tile-content {
+    justify-content: left;
+    align-items: flex-start;
+    padding-left: 10px;
+    padding-right: 10px;
+
+  }
+
+  .work-allocation {
+    background-color: white;
+    height: 50px;
+    width: 100%;
+
+  }
+
+  .work-allocation-sub {
+    background-color: white;
+    height: 2.5rem;
+    width: 100%;
+  }
+
+  mat-grid-list {
+    padding-bottom: 0rem;
+  }
+
+  .button-container {
+    display: inline-block;
+
+    button {
+      margin-left: 5px;
+    }
+
+  }
+
+  .align-right {
+    float: right;
+  }
+
+  .align-left {
+    float: left;
+  }
+
+  .work-allocation-heading {
+    display: inline-block;
+    margin-top: 0.5rem;
+    padding-left: 10px;
+    font-family: "calibri";
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.471;
+    color: #73879C;
+    letter-spacing: normal;
+
+
+
+  }
+
+  .btn-actions {
+    height: 35px;
+  }
+
+  .email-subject-container {
+    padding-left: 15px;
+    padding-top: 10px;
+    font-size: 18px;
+    color: #73879C;
+    font-family: "calibri";
+
+  }
+
+  .mail-time {
+    padding-right: 10px;
+    font-size: 14px;
+    color: #73879C;
+    font-family: "calibri";
+  }
+
+  .email-sender {
+
+
+    margin-top: 10px;
+    background-color: white;
+    width: 100%;
+    padding: 10px;
+    padding-bottom: 0rem;
+
+
+
+
+
+    .top-align {
+      padding-top: .3rem;
+    }
+
+    .mat-divider {
+      width: 98%;
+    }
+
+  }
+
+  .email-body {
+    margin-top: 10px;
+    background-color: white;
+    width: 100%;
+    padding: 10px;
+
+  }
+
+  .work-allocation-form {
+    background-color: white;
+    width: 100%;
+    padding: 10px;
+  }
+
+  .dis-inline {
+    display: inline-block;
+  }
+
+  .dis-block {
+    display: block;
+  }
+
+  .form-field {
+    margin-right: 8px;
+  }
+
+  .dis-inline form-field {
+    width: fit-content;
+    height: 20px;
+    font-size: 12px;
+  }
+
+  .mat-mdc-card-header {
+    color: #337AB7;
+    justify-content: center;
+  }
+
+  .btn-round {
+    border-radius: 30px;
+  }
+
+  .je-btn {
+    margin-bottom: 0px;
+    font-size: 12px;
+  }
+
+  .btn-default {
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc;
+  }
+
+  .reply-icon {
+    padding-left: 300px;
+  }
+
+  .mdc-button__label {
+    font-size: 12px;
+    margin-left: -.6rem;
+  }
+
+  .disabled-icon {
+    pointer-events: none;
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .required-star {
+    color: red;
+  }
+
+  .matformfield {
+    font-size: 14px;
+   
+  }
+
+  .matlabel {
+    font-size: 14px;
+    font-family: "calibri";
+  }
+
+  .mdc-floating-label--required:not(.mdc-floating-label--hide-required-marker)::after {
+    margin-left: 1px;
+    margin-right: 0px;
+    content: "";
+  }
+
+  .x_panel {
+    position: relative;
+    width: 98%;
+    margin-bottom: 10px;
+    padding: 10px 17px;
+    display: inline-block;
+    background: #fff;
+    border: 1px solid #E6E9ED;
+    -webkit-column-break-inside: avoid;
+  }
+
+
+  .x-title {
+
+
+    border-bottom: 2px solid #E6E9ED;
+    padding: 1px 5px 6px;
+    margin-bottom: 10px
+  }
+
+  .mailTime {
+    font-size: 14px;
+    float: right;
+  }
+
+  .sender-info h6 {
+    font-size: 14px;
+    font-family: "calibri";
+    color: #73879C;
+  }
+
+  .wm-ddn {
+    width: 91%;
+  }
+
+
+}
+
+.grid-tile {
+  margin: 10px;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+
+// Varun CSS
+
+.example-card {
+  width: 100%;
+  margin-top: 10px;
+  border: 1px solid #E6E9ED !important;
+  box-shadow: 0px 0px 2px #E6E9ED;
+  border-radius: 7px 7px 0px 0 !important;
+}
+
+.example-card .mat-mdc-card-content.card-content {
+  font-size: 14px;
+  color: #73879C;
+  border-top: 1px solid #E6E9ED;
+  height: 20px;
+  padding-top: 3px;
+  padding-bottom: 4px !important;
+}
+
+app-work-allocation .mat-mdc-card-title {
+  border-radius: 0px 0px 0px 0px;
+  height: 25px;
+  text-align: center;
+  font-weight: bold;
+  font-family: Calibri;
+  font-size: 21px;
+  padding: 0px;
+  margin-bottom: 5px;
+}
+
+.allocationBox {
+  display: block;
+  position: relative;
+}
+
+.work-allocation {
+  display: flex !important;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.work-allocation-heading {
+  display: flex !important;
+  justify-content: flex-start;
+}
+
+.button-container {
+  display: flex !important;
+  justify-content: flex-end;
+}
+
+.button-container {
+  margin-top: 7px;
+  margin-right: 10px;
+}
+
+app-work-allocation .x_panel {
+
+  position: relative;
+  margin-bottom: 10px;
+  padding: 10px 17px;
+  display: flex;
+  background: #fff;
+  border: 1px solid #E6E9ED;
+  -webkit-column-break-inside: avoid;
+  flex-wrap: wrap;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+app-work-allocation .work-allocation-sub {
+  position: relative;
+  padding: 10px 17px;
+  display: flex;
+  background: #fff;
+  border: 1px solid #E6E9ED;
+  -webkit-column-break-inside: avoid;
+  flex-wrap: wrap;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.x_content.rem-mt {
+  width: 100%;
+}
+
+.emailContainer {
+  width: 100%;
+}
+
+.sender-info {
+  display: flex;
+  flex-direction: row;
+  /* Default direction is row, no need to specify */
+  flex-wrap: wrap;
+}
+
+.fromContainer {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.replyContainer {
+  display: flex;
+  justify-content: flex-end;
+  margin-left: auto;
+}
+
+.button-container button {
+  height: 30px !Important;
+  font-family: "calibri";
+  letter-spacing: normal;
+  font-weight: 600;
+}
+
+app-work-allocation .work-allocation {
+  height: 44px;
+}
+
+.mat-grid-list.workContainer .mat-grid-tile-content .work-allocation-form.wm-border.sentiment {
+  background-color: white;
+  width: 100%;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.sentimentContent {
+  padding: 10px;
+}
+
+.form-field .matformfield input,
+.form-field .matformfield mat-select {
+
+  line-height: 1.5;
+  border-radius: 0.2rem;
+  border: 1px solid #ced4da;
+  padding: .25rem .5rem;
+  box-sizing: border-box;
+}
+
+.form-field .matformfield mat-select {
+  padding: .15rem .5rem;
+
+}
+
+.no-bottom-border .mat-form-field-ripple {
+  display: none;
+  /* Hide the bottom border */
+}
+
+.emailContainer .grid-tile {
+  padding: 0;
+  margin: 0;
+}
+
+.emailContainer .grid-tile .mat-grid-tile-content {
+  padding: 0 5px;
+  margin: 0;
+
+}
+
+.emailContainer .grid-tile .mat-grid-tile-content .form-field {
+  width: 100%;
+}
+
+.emailContainer .grid-tile .mat-grid-tile-content .matformfield {
+  font-size: 14px;
+  width: 100%;
+}
+
+.emailContainer .grid-tile .mat-grid-tile-content .matformfield input {
+  width: 100%;
+  line-height: 1.5;
+  border-radius: 0.2rem;
+  border: 1px solid #ced4da;
+  padding: 0.25rem 0.5rem;
+  box-sizing: border-box;
+}
+
+.emailContainer.commentContainer .dis-block {
+  width: 100%;
+}
+
+.emailContainer.commentContainer .dis-block textarea {
+  width: 94%;
+  height: 57px;
+  padding: 4px 10px;
+  border-radius: 0.2rem;
+  border: 1px solid #ced4da;
+}
+
+.row.btnContainer {
+  text-align: right;
+  padding-right: 10px;
+  padding-bottom: 40px;
+}
+
+button.mat-primary.saveBtn {
+  color: #fff;
+  background-color: #337AB7;
+  border: #337AB7;
+  text-align: center;
+  letter-spacing: normal;
+}
+
+button.mat-primary.saveBtn span.mdc-button__label,
+button.cancelBtn span.mdc-button__label {
+  margin: 0 !important;
+}
+
+button.cancelBtn {
+  background: #73879C !important;
+  color: #fff !important;
+  border: #73879C;
+  text-align: center;
+  margin-right: 10px;
+  letter-spacing: normal;
+}
+
+.form-group.text-right {
+  text-align: right;
+  width: 100%;
+}
+
+.view-mail {
+  overflow: auto;
+  height: 275px;
+  width: 100%;
+  margin-top: 0px
+}
+
+app-work-allocation .email-subject-container {
+  padding-left: 0px;
+  padding-top: 0px;
+}
+
+.email-subject-container {
+  width: 100%;
+}
+
+.mail-time.align-right {
+  text-align: right;
+  padding: 0;
+}
+
+.emailTo {
+  font-size: 13px !important;
+  font-family: "calibri";
+  color: #73879C;
+}
+
+.workAllocationContainer {
+  font-family: "calibri";
+}
+.sentimentContent {
+  padding: 10px;
+  overflow-y: auto;
+  height: 370px;
+}
+.row.actionContainer {
+  padding: 0 6px;position: relative;
+}
+.row.actionContainer mat-datepicker-toggle.mat-datepicker-toggle {
+  position: absolute;
+  right: 13px;
+  top: 12px;
+}

@@ -1,0 +1,165 @@
+<div class="template-container" style="overflow-x: hidden;overflow-y: auto;height: 100%;">
+  <div class="loader-container" *ngIf="isLoading">
+    <img src="assets/4_loading.gif" alt="Loading" />
+  </div>
+
+  <div class="close-icon" (click)="closeModal()">
+    <mat-icon style="font-size: 18px; color:#73879C">close</mat-icon>
+  </div>
+  <!-- <h2 mat-diaalog-title class="heading">{{selectedAction}}</h2> -->
+
+  <h2 mat-dialog-title class="heading">{{selectedAction}}</h2>
+  <div class="custom-dialog-container" style="overflow: hidden;height: 165px;">
+    <div style="display: flex; flex-direction: column;">
+      <div class="form-field-container">
+        <mat-label>From</mat-label>
+        <div class="text-input-field">
+          <input matInput placeholder="From" [(ngModel)]="fromValue">
+        </div>
+      </div>
+      <div class="form-field-container">
+        <mat-label>To</mat-label>
+        <div class="text-input-field">
+          <input matInput placeholder="To" [(ngModel)]="toValue">
+        </div>
+      </div>
+
+      <div class="form-field-container">
+        <mat-label>CC</mat-label>
+        <div class="text-input-field">
+          <input matInput placeholder="CC" [(ngModel)]="ccValue">
+        </div>
+      </div>
+      <div class="form-field-container">
+        <mat-label>BCC</mat-label>
+        <div class="text-input-field">
+          <input matInput placeholder="BCC" [(ngModel)]="ccValue">
+        </div>
+      </div>
+
+      <div class="form-field-container">
+
+        <mat-label>Subject</mat-label>
+        <div class="text-input-field">
+          <input matInput placeholder="Subject" [(ngModel)]="subjectValue">
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+  <div>
+    <div class="toolbar-container" style="display: inline-block; width: 35%;
+     ">
+      <div class="trix-toolbar">
+        <div class="toolbar-group">
+          <mat-icon (click)="applyTrixAttribute('bold')" matTooltip="Bold">format_bold</mat-icon>
+          <span class="toolbar-separator"></span>
+          <mat-icon (click)="applyTrixAttribute('italic')" matTooltip="Italic">format_italic</mat-icon>
+          <span class="toolbar-separator"></span>
+          <mat-icon (click)="applyTrixAttribute('strike')" matTooltip="Strikethrough">strikethrough_s</mat-icon>
+          <span class="toolbar-separator"></span>
+          <mat-icon (click)="applyTrixAttribute('link')" matTooltip="Link">link</mat-icon>
+        </div>
+        <div class="toolbar-group">
+          <mat-icon (click)="applyTrixAttribute('bullet')" matTooltip="Bullet">format_list_bulleted</mat-icon>
+          <span class="toolbar-separator"></span>
+          <mat-icon (click)="applyTrixAttribute('number')" matTooltip="Number">format_list_numbered</mat-icon>
+          <span class="toolbar-separator"></span>
+          <mat-icon (click)="applyTrixAttribute('quote')" matTooltip="Quote">format_quote</mat-icon>
+          <span class="toolbar-separator"></span>
+          <mat-icon (click)="applyTrixAttribute('code')" matTooltip="Code">code</mat-icon>
+          <span class="toolbar-separator"></span>
+          <mat-icon (click)="increaseIndent()" matTooltip="Increase Indent">format_indent_increase</mat-icon>
+          <span class="toolbar-separator"></span>
+          <mat-icon (click)="decreaseIndent()" matTooltip="Decrease Indent">format_indent_decrease</mat-icon>
+        </div>
+        <div class="toolbar-group">
+          <mat-icon (click)="undo()" matTooltip="Undo">undo</mat-icon>
+          <span class="toolbar-separator"></span>
+          <mat-icon (click)="redo()" matTooltip="Redo">redo</mat-icon>
+        </div>
+      </div>
+
+    </div>
+    <div style="display: inline-block;width: 35%;float:right;
+      " class="response-template-container"
+      *ngIf="responseTemplateLoaded && selectedAction !== 'Forward'">
+      <label class="res-title" for="template">Response Template</label>
+      <!-- <select [(ngModel)]="templateValue" (change)="onTemplateSelectionChange()">
+          <option value="" disabled selected>-No Response Template-</option>
+          <option *ngFor="let template of responsetemplate" [value]="template.fileName">
+            {{ template.templateName }}
+          </option>
+        </select> -->
+
+      <mat-form-field style="margin-right: 10px;">
+        <mat-select [(ngModel)]="templateValue" placeholder="Response Templates">
+          <mat-option *ngFor="let template of responsetemplate" [value]="template.fileName">{{ template.templateName
+            }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+
+
+    </div>
+  </div>
+
+
+
+  <trix-editor #trixEditor [(ngModel)]="messageValue" class="trix-content" spellcheck="true" lang="en"
+    style="overflow: auto; height: 200px; width: 96%; margin-top: 0;margin-left: 20px;margin-bottom: 20px;"
+    (trix-change)="handleTrixChange($event)"></trix-editor>
+
+  <!-- <trix-editor #trixEditor [(ngModel)]="messageValue" class="trix-content" spellcheck="true" lang="en"
+        style="overflow: auto; height: 200px; width: 95.3%; margin-top: 0;margin-left: 20px;margin-bottom: 20px;"
+        (trix-change)="handleTrixChange($event)"></trix-editor> -->
+
+  <div style="padding-bottom: 50px; margin-left: 10px;" [innerHtml]="sanitizedMessageValue">
+    <span class="gold-symbol" (click)="onSymbolClick($event, goldLink)">&#9733;</span>
+    <span class="green-symbol" (click)="onSymbolClick($event, greenLink)">&#9733;</span>
+    <span class="yellow-symbol" (click)="onSymbolClick($event, yellowLink)">&#9733;</span>
+    <span class="red-symbol" (click)="onSymbolClick($event, redLink)">&#9733;</span>
+  </div>
+
+
+
+  <!-- <div class="view-mail" flex style="overflow: auto; height:350px;width:100%; margin-top:0px" id="DivMailBody">
+    <div class="col-lg-12 col-sm-12 col-md-12" [innerHTML]='workManagement.body'></div>
+ </div> -->
+  <div class="attachementContainer">
+    <div class="attachement">
+      <span>
+        <i class="material-icons" style="vertical-align: middle;">attach_file</i>
+      </span>
+      <span>Attachment -</span>
+    </div>
+    <div class="attachment-list">
+      <span *ngFor="let attachment of attachments">
+        <mat-icon [ngClass]="getIconClass(attachment)" (click)="openFile(attachment.attachmentId)"
+          [matTooltip]="attachment.fileName">{{ attachment.icon }}</mat-icon>
+        <mat-icon class="delete-icon" [matTooltip]="'Delete ' + attachment.fileName"
+          (click)="deleteAttachment(attachment.attachmentId)">clear</mat-icon>
+      </span>
+    </div>
+    <div class="attach-file-button-container" *ngIf="selectedAction !== 'View Email Body'">
+      <label for="fileInput">Select Files:</label>
+      <input type="file" (change)="attachFile($event)" #fileInput multiple>
+    </div>
+  </div>
+
+
+  <div class="template-actions">
+    <div class="checkboxes">
+      <span>Do you want to include a feedback survey?</span>
+      <mat-checkbox [(ngModel)]="isCheckedYes" (click)="onCheckboxChange('yes')">Yes</mat-checkbox>
+      <mat-checkbox [(ngModel)]="isCheckedNo" (click)="onCheckboxChange('no')">No</mat-checkbox>
+    </div>
+    <div class="send-button">
+      <button mat-raised-button class="saveBtn" color="primary" (click)="sendReply()">Send</button>
+    </div>
+    <div class="cancel-button">
+      <button class="cancelBtn" mat-button (click)="closeModal()">Close</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,56 @@
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    //background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+  }
+  
+  .modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 4px;
+    width: 250px;
+    box-shadow: 0 5px 15px rgba(0,0,0,.5);
+  }
+  
+  .close-icon {
+    cursor: pointer;
+    position: absolute;
+   padding-left: 280px;
+  }
+  
+  .custom-dialog-container {
+    margin-top: 10px;
+  }
+  
+  .template-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+  }
+  .validation-message {
+    color: #ff0000; /* Set the color to warn (red) */
+    font-size: 12px;
+    margin-top: 5px;
+  }
+ .custom-dialog-container{
+  border-radius: 0;
+    line-height: 30px;
+    width: 100%;
+ }
+ textarea {
+  border: 1px solid #ccc;
+  font-size: 13px !important;
+  padding: 2px 10px;
+  width: 100%;
+  margin-bottom: 5px;
+  color: #000;
+  box-sizing: border-box;
+  background-color: #fff;
+}

@@ -1,0 +1,108 @@
+<div class="example-container">
+  <app-loading-spinner [isLoading]="isLoading"></app-loading-spinner>
+  <div class="grid_container">
+    <div class="grid_container" style="margin-left: 19px ">
+      <div class="grid_row">
+        <div class="title">Today's SLA Due Data</div>
+        <div class="button_wrraper"> <button class="my-button" (click)="todayDueData()"
+            mat-raised-button>Export to CSV</button></div>
+      </div>
+      <div class="grid_row">
+        <div class="title">Outstanding Report</div>
+        <div class="button_wrraper"><button class="my-button" (click)="outStandingData()"
+            mat-raised-button>Export to CSV</button> </div>
+        <div *ngIf="loadings" class="overlay">
+          <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+        </div>
+      </div>
+      <div class="grid_row">
+        <hr/>
+        <div class="date_block_wrraper">
+          <mat-dialog-content class="mat-typography"></mat-dialog-content>
+          <mat-grid-list cols="3" rowHeight="100px">
+            <mat-grid-tile class="filter">
+              <div class="form_wrapper">
+                <div class="matgrid_title"> Enter a date range:</div>
+                <div class="form-field-container">
+                  <mat-date-range-input [rangePicker]="picker">
+                    <input matStartDate placeholder="Start date" name="startDate" [(ngModel)]="startDate">
+                    <input matEndDate placeholder="End date" name="endDate" [(ngModel)]="endDate">
+                  </mat-date-range-input>
+                  <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-date-range-picker #picker></mat-date-range-picker>
+                </div>
+              </div>
+  
+            </mat-grid-tile>
+            <mat-grid-tile class="filter">
+              <div class="form_wrapper">
+                <div class="matgrid_title"> Select Email Inbox:</div>
+                <div class="form-field-container">
+                  <mat-select placeholder="Select Email Inbox" [(ngModel)]="emailInbox" name="emailInbox"
+                    (selectionChange)="emailInboxChange($event.value)">
+                    <mat-option *ngFor="let Category of categories" [value]="Category.id">
+  
+                      {{ Category.name }}
+  
+  
+                    </mat-option>
+                  </mat-select>
+                </div>
+              </div>
+  
+            </mat-grid-tile>
+  
+            <mat-grid-tile class="filter">
+              <div class="form_wrapper">
+                <div class="matgrid_title"> Select Email Inbox Category:</div>
+                <div class="form-field-container">
+                  <mat-select placeholder=" Select Email Inbox Category" [(ngModel)]="emailInboxCategory" name="emailInboxCategory">
+                    <mat-option *ngFor="let subcategory of subcategories" [value]="subcategory.id">
+  
+                      {{ subcategory.subcategory }}
+  
+  
+                      <!-- <mat-option *ngFor="let subCategories of subCategories" [value]="subCategories.id">
+            {{ subCategories.name }} -->
+  
+  
+  
+                    </mat-option>
+                  </mat-select>
+                </div>
+              </div>
+  
+            </mat-grid-tile>
+          </mat-grid-list>
+        </div>
+        
+      </div>
+      <div class="grid_row">
+        <div class="title">MIData</div>
+        <div class="button_wrraper">
+          <button (click)="miData()" class="my-button" mat-raised-button>Export to CSV</button>
+          <mat-progress-spinner *ngIf="loading" mode="indeterminate"></mat-progress-spinner>
+        </div>
+      </div>
+
+      <div class="grid_row">
+        <div class="title">Completed Report</div>
+        <div class="button_wrraper"> <button class="my-button" (click)="completedData()"
+            mat-raised-button>Export to CSV</button>
+        </div>
+      </div>
+      <div class="grid_row">
+        <div class="title">Transactional Report</div>
+        <div class="button_wrraper"> <button class="my-button" (click)="transactionalData()"
+            mat-raised-button>Export to CSV</button>
+        </div>
+      </div>
+      <div class="grid_row">
+        <div class="title">Agent Process Clearence Report</div>
+        <div class="button_wrraper"> <button class="my-button" (click)="agentProcessClearanceData()"
+            mat-raised-button>Export to CSV</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

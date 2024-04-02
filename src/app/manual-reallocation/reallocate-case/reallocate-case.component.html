@@ -1,0 +1,213 @@
+
+<div class="example-container">
+  <mat-dialog-content class="mat-typography">
+    <app-loading-spinner [isLoading]="isLoading"></app-loading-spinner>
+    
+    <div class="grid_container">
+      <h2 class="grid_container_title_header">Search</h2>
+      <mat-grid-list cols="4" rowHeight="100px" >
+        <mat-grid-tile class="filter">
+          <div class="form_wrapper">
+            <div class="title">  Email Receive Date:</div>
+            <div class="form-field-container">
+              <mat-date-range-input [rangePicker]="picker">
+                <input matStartDate placeholder="Start date" name="startDate" [(ngModel)]="startDate" >
+                  <input matEndDate placeholder="End date" name="endDate" [(ngModel)]="endDate" >
+              </mat-date-range-input>
+              <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-date-range-picker #picker></mat-date-range-picker>
+            </div>
+          </div>
+  
+        </mat-grid-tile>
+          <mat-grid-tile class="filter">
+            <div class="form_wrapper">
+              <div class="title"> Select Email Inbox:</div>
+              <div class="form-field-container">
+                <mat-select placeholder="Email Inbox" [(ngModel)]="emailInbox" name="emailInbox" (selectionChange)="emailInboxChange($event.value)">
+                  <mat-option value="0"> All</mat-option>
+                  <mat-option *ngFor="let Category of categories" [value]="Category.id">
+      
+                    {{ Category.name }}
+      
+      
+                  </mat-option>
+                </mat-select>
+              </div>
+            </div>
+    
+          </mat-grid-tile>
+        
+        <mat-grid-tile class="filter">
+          <div class="form_wrapper">
+            <div class="title"> Select Email Inbox Category:</div>
+            <div class="form-field-container">
+              <mat-select [(ngModel)]="emailInboxCategory" name="emailInboxCategory" placeholder="-Email Inbox Category-"
+              (selectionChange)="emailInboxCategoryChange()">
+              <mat-option value="0"> All</mat-option>
+              <mat-option *ngFor="let subcategory of subcategories" [value]="subcategory.id">
+  
+                {{ subcategory.subcategory }}
+  
+  
+              </mat-option>
+            </mat-select>
+            </div>
+          </div>
+  
+        </mat-grid-tile>
+  
+        <mat-grid-tile class="filter">
+          <div class="form_wrapper">
+            <div class="title"> Action Taken:</div>
+            <div class="form-field-container">
+              <mat-select placeholder="Action Taken"  [(value)]="selectedValue" class="full-width-select">
+                <mat-option *ngFor="let option of actionsdata" [value]="option.id">{{ option.description }}</mat-option>
+              </mat-select>
+            </div>
+          </div>
+  
+        </mat-grid-tile>     
+  
+      </mat-grid-list>
+      <mat-grid-list cols="4" style="padding-left: 30px;" rowHeight="100px">
+        <mat-grid-tile class="filter">
+          <div class="form_wrapper">
+            <div class="title"> Work Id:</div>
+            <div class="form-field-container">
+              <input matInput class="form-control" type="text" placeholder="WorkID" name="workid" 
+              [(ngModel)]="workId">
+            </div>
+          </div>
+  
+        </mat-grid-tile> 
+        <mat-grid-tile class="filter">
+          <div class="form_wrapper">
+            <div class="title"> Email Subject:</div>
+            <div class="form-field-container">
+              <input class="form-control" type="text" placeholder="Email Subject" matInput [(ngModel)]="subject" name="subject">
+            </div>
+          </div>
+  
+        </mat-grid-tile> 
+      
+        <mat-grid-tile colspan="1" style=" margin-top:8px;margin-left: -45px;;"> 
+          <div>
+            <button type="submit" md-button class="my-button" (click)="searchAndAssignCase()"><i class="fa fa-seach"></i> Search</button>
+  
+          </div>
+          <div style="width:30%; float: right;">
+  
+            <button md-button class="my-button" (click)="clear()">Clear</button>
+          </div>
+        </mat-grid-tile>
+  
+      </mat-grid-list>
+    </div>
+
+    <div class="grid_container">
+      <h2 class="grid_container_title_header">Reallocation</h2>
+      <mat-grid-list cols="2" rowHeight="100px" >
+        <mat-grid-tile class="filter">
+          <div class="form_wrapper" style="margin-left:-31px; ;">
+            <div class="title">  Employee Name:</div>
+            <div class="form-field-container">
+              <mat-select placeholder="Employee Name" [(ngModel)]="employeeId" name="employeeId">
+    
+                <mat-option *ngFor="let employee of filteredEmployees" [value]="employee.email">
+                  {{ employee.name }}-{{ employee.email }}
+                </mat-option>
+              </mat-select>  
+              <button type="submit" md-button class="my-button" (click)="assigneWork()">Assign</button>            
+            </div>
+          </div>
+  
+        </mat-grid-tile> 
+       
+      </mat-grid-list>
+      <mat-grid-list cols="1" rowHeight="100px" >
+        <div style="border-bottom: 1px solid #73879C;margin-top: 25px;margin-left: 5px;;">
+          <table mat-table [dataSource]="activePageDataChunk">
+      
+          <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+          <!-- user name Column -->
+          <ng-container matColumnDef="Action">
+      
+          <th mat-header-cell *matHeaderCellDef>
+            <mat-checkbox class="custom-checkbox" [checked]="isChecked()" [indeterminate]="isIndeterminate()"
+              (change)="selectAllWork($event)" type="checkbox" class="mat-checkbox-blue"></mat-checkbox>
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <mat-checkbox class="custom-checkbox" type="checkbox" (click)="$event.stopPropagation()"
+              [checked]="isExist(element.workID)" (change)="selectWork(element.workID, $event)"
+              class="mat-checkbox-blue"></mat-checkbox>
+          </td>
+          </ng-container>
+          <!-- user name Column -->
+          <ng-container matColumnDef="WorkID">
+          <th mat-header-cell *matHeaderCellDef> WorkID </th>
+          <td mat-cell *matCellDef="let element"> {{element.workID}} </td>
+          </ng-container>
+      
+          <!-- Category Column -->
+          <ng-container matColumnDef="Category">
+          <th mat-header-cell *matHeaderCellDef> Email Inbox </th>
+          <td mat-cell *matCellDef="let element"> {{element.emailCategory}} </td>
+          </ng-container>
+          <!-- SubCategory Column -->
+          <ng-container matColumnDef="SubCategory">
+          <th mat-header-cell *matHeaderCellDef> Email Inbox Category </th>
+          <td mat-cell *matCellDef="let element"> {{element.subCategory}} </td>
+          </ng-container>
+          <!-- EmailReceivedDate Column -->
+          <ng-container matColumnDef="EmailReceivedDate">
+          <th mat-header-cell *matHeaderCellDef> Email Received Date </th>
+          <td mat-cell *matCellDef="let element"> {{element.receivedDate}} </td>
+          </ng-container>
+      
+          <!-- EmailSubject Column -->
+          <ng-container matColumnDef="EmailSubject">
+          <th mat-header-cell *matHeaderCellDef> Email Subject </th>
+          <td mat-cell *matCellDef="let element"> {{element.subject}} </td>
+          </ng-container>
+          <!-- WokedBy Column -->
+          <ng-container matColumnDef="WokedBy">
+          <th mat-header-cell *matHeaderCellDef> Woked By </th>
+          <td mat-cell *matCellDef="let element"> {{element.workedBy}} </td>
+          </ng-container>
+      
+          <!-- ActionTaken Column -->
+          <ng-container matColumnDef="ActionTaken">
+          <th mat-header-cell *matHeaderCellDef> Action Taken </th>
+          <td mat-cell *matCellDef="let element"> {{element.workStatus}} </td>
+          </ng-container>
+      
+          <!-- worked date Column -->
+          <ng-container matColumnDef="WorkedDate">
+          <th mat-header-cell *matHeaderCellDef> Worked Date </th>
+          <td mat-cell *matCellDef="let element"> {{element.workFinishDate}} </td>
+          </ng-container>
+      
+          <!-- SLA Column -->
+          <ng-container matColumnDef="SLA">
+          <th mat-header-cell *matHeaderCellDef> SLA </th>
+          <td mat-cell *matCellDef="let element"> {{element.expiryDate}} </td>
+            </ng-container>
+      
+      
+      
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      
+      
+          </table>
+        </div>
+          <mat-paginator showFirstLastButtons [length]="dataSource.length" [pageSize]="pageSize"
+            [pageSizeOptions]="pageSizeOptions" [pageIndex]= "pageIndex"
+            (page)="onPageChanged($event)"></mat-paginator>
+          </mat-grid-list>
+    </div>   
+   
+  </mat-dialog-content>
+</div>

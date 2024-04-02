@@ -1,0 +1,385 @@
+<!-- <div class="dialog-container" style="height: 100%; width: 100%; white-space: nowrap;"> -->
+  <div class="dailog-container">
+    <app-loading-spinner [isLoading]="isLoading"></app-loading-spinner>
+    <div class="close-icon" (click)="closeModal()">
+      <mat-icon>close</mat-icon>
+    </div>
+    <h2 mat-dialog-title class="heading">Search</h2>
+    <mat-dialog-content class="mat-typography">
+
+    <mat-grid-list cols="4" rowHeight="50px" class="bg-whitesmoke">
+      <mat-grid-tile class="filter">
+          <div class="form-field-container">
+            <input matInput class="form-control" type="text" placeholder="WorkID" name="workid" 
+              [(ngModel)]="workid">
+          </div>
+      </mat-grid-tile>
+
+      <mat-grid-tile class="filter">
+      <div class="form-field-container">
+        <mat-date-range-input [rangePicker]="picker">
+          <input matStartDate placeholder="Start date" name="startDate" [(ngModel)]="startDate">
+            <input matEndDate placeholder="End date" name="endDate" [(ngModel)]="endDate">
+        </mat-date-range-input>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+      </div>
+    </mat-grid-tile>
+      
+      
+      <mat-grid-tile class="filter">
+
+        <div class="form-field-container">
+
+          <mat-select [(ngModel)]="emailInbox" name="emailInbox" placeholder="-email Inbox-" (selectionChange)="emailInboxChange($event.value)">
+            <mat-option value="0"> All</mat-option>
+            <mat-option *ngFor="let Category of categories" [value]="Category.id">
+
+              {{ Category.name }}
+
+
+            </mat-option>
+          </mat-select>
+        </div>
+
+      </mat-grid-tile>
+
+      <mat-grid-tile class="filter">
+        <div class="form-field-container">
+
+          <mat-select [(ngModel)]="emailInboxCategory" name="emailInboxCategory" placeholder="-Email Inbox Category-"
+            (selectionChange)="emailInboxCategoryChange()">
+            <mat-option value="0"> All</mat-option>
+            <mat-option *ngFor="let subcategory of subcategories" [value]="subcategory.id">
+
+              {{ subcategory.subcategory }}
+
+
+            </mat-option>
+          </mat-select>
+
+        </div>
+      </mat-grid-tile>
+</mat-grid-list>
+
+<mat-grid-list cols="4" rowHeight="100px" class="bg-whitesmoke">
+      <mat-grid-tile  class="filter">
+        <div class="form-field-container">
+          <mat-select [(value)]="actionID" class="full-width-select" placeholder="-Action Taken-">
+            <mat-option value="0">--All--</mat-option>
+            <ng-container *ngFor="let option of actionsdata">
+              <mat-option [value]="option.code">{{ option.description }}</mat-option>
+            </ng-container>
+          </mat-select>
+        </div>
+      </mat-grid-tile>
+
+      <mat-grid-tile  class="filter">
+        <div class="form-field-container">
+          <input matInput class="form-control" [(ngModel)]="subject" name="subject" placeholder="-Email subject-">
+        </div>
+       </mat-grid-tile>
+
+      <mat-grid-tile  class="filter">
+          <div class="form-field-container">
+          <input matInput class="form-control" [(ngModel)]="emailaddress" name="emailaddress" placeholder="-Email Address-">
+        </div>
+      </mat-grid-tile>
+
+      <mat-grid-tile class="filter btnContainer">
+        <button mat-flat-button class="clear" color="primary" (click)="clear()">Clear</button>
+        <button mat-flat-button class="search" color="primary" [disabled]="!isSearchEnabled()" (click)="search()">Search</button>
+      </mat-grid-tile>
+    
+    </mat-grid-list>
+<!-- 
+    <mat-grid-tile colspan="4">
+      <div style="width: 100%;"> -->
+        <div class="customTable">
+        <table mat-table [dataSource]="activePageDataChunk" id="data-table" class="table table-bordered">
+          <ng-container matColumnDef="workID">
+            <th mat-header-cell *matHeaderCellDef> Work ID </th>
+            <td mat-cell *matCellDef="let element">{{ element.workId }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="subject">
+            <th mat-header-cell *matHeaderCellDef> Subject Line </th>
+            <td mat-cell *matCellDef="let element">{{ element.subject }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="emailCategory">
+            <th mat-header-cell *matHeaderCellDef> Email Inbox </th>
+            <td mat-cell *matCellDef="let element">{{ element.emailCategory }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="emailSubCategory">
+            <th mat-header-cell *matHeaderCellDef> Email Inbox Category </th>
+            <td mat-cell *matCellDef="let element">{{ element.emailSubCategory }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="from">
+            <th mat-header-cell *matHeaderCellDef> From Email</th>
+            <td mat-cell *matCellDef="let element">{{ element.from }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="receivedDate">
+            <th mat-header-cell *matHeaderCellDef> Receive Date</th>
+            <td mat-cell *matCellDef="let element">{{ element.receivedDate }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="activityDate">
+            <th mat-header-cell *matHeaderCellDef> Worked Date </th>
+            <td mat-cell *matCellDef="let element">{{ element.activityDate }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="workStatus">
+            <th mat-header-cell *matHeaderCellDef> Action Taken </th>
+            <td mat-cell *matCellDef="let element">{{ element.workStatus }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="workedBy">
+            <th mat-header-cell *matHeaderCellDef> Worked By </th>
+            <td mat-cell *matCellDef="let element">{{ element.workedBy }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="dueDate">
+            <th mat-header-cell *matHeaderCellDef> Due Date </th>
+            <td mat-cell *matCellDef="let element">{{ element.dueDate }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef> Action </th>
+            <td mat-cell *matCellDef="let element">
+              <button mat-icon-button (click)="performAction(element)" matTooltip="Action"
+                *ngIf="element.workStatus === 'Fresh' && !isViewOnlyMode">
+                <mat-icon>play_arrow</mat-icon>
+              </button>
+              <button mat-icon-button (click)="viewDetails(element)" matTooltip="View"
+                *ngIf="element.workStatus !== 'Fresh' || isViewOnlyMode">
+                <mat-icon>visibility</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let element; columns: displayedColumns;"></tr>
+        </table>
+        <div *ngIf="dataSource.length === 0" class="no-records" style="text-align: center;color: #73879C;box-sizing: border-box;">
+
+          No record found, Please select relevent search criteria
+
+        </div>
+        </div>
+      <!-- </div> -->
+    <!-- </mat-grid-tile> -->
+
+
+
+    <mat-grid-tile colspan="4">
+      <mat-paginator showFirstLastButtons [length]="dataSource.length" [pageSize]="pageSize"
+        [pageSizeOptions]="pageSizeOptions" [pageIndex]= "pageIndex"
+        (page)="onPageChanged($event)"></mat-paginator>
+    </mat-grid-tile>
+
+
+</mat-dialog-content>
+</div> 
+
+<!-- 
+  <div class="search-email-container">
+    <div class="template-container">
+      <div class="loader-container" *ngIf="isLoading">
+        <img src="assets/4_loading.gif" alt="Loading" />
+      </div>
+      <div class="close-icon" (click)="closeModal()">
+        <mat-icon style="font-size: 18px; color:#73879C">close</mat-icon>
+      </div>
+       
+  <h2 mat-dialog-title style="width: 65rem;">Search</h2>
+  <mat-dialog-content class="mat-typography">
+
+    <mat-grid-list cols="4" rowHeight="100px">
+        <mat-grid-tile [rowHeight]="60" class="emailContainer">
+            <div class="matformfield no-bottom-border">
+
+              <input matInput type="text" placeholder="WorkID" name="workid" 
+                [(ngModel)]="workid">
+            </div>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+          <div class="row actionContainer">
+            <div class="dis-block">
+              <mat-date-range-input [rangePicker]="picker">
+              <input matStartDate placeholder="Start date" name="startDate" [(ngModel)]="startDate">
+              <input matEndDate placeholder="End date" name="endDate" [(ngModel)]="endDate">
+              </mat-date-range-input>
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </div>
+          </div>
+        </mat-grid-tile>
+
+       
+
+        <mat-grid-tile>
+          <mat-form-field>
+  
+            <mat-label>Select Email Inbox</mat-label>
+            <mat-select [(ngModel)]="emailInbox" name="emailInbox" (selectionChange)="emailInboxChange($event.value)">
+              <mat-option value="0"> All</mat-option>
+              <mat-option *ngFor="let Category of categories" [value]="Category.id">
+  
+                {{ Category.name }}
+  
+  
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <mat-form-field>
+  
+            <mat-label>Select Email Inbox Category</mat-label>
+  
+            <mat-select [(ngModel)]="emailInboxCategory" name="emailInboxCategory"
+              (selectionChange)="emailInboxCategoryChange()">
+              <mat-option value="0"> All</mat-option>
+              <mat-option *ngFor="let subcategory of subcategories" [value]="subcategory.id">
+  
+                {{ subcategory.subcategory }}
+  
+  
+              </mat-option>
+            </mat-select>
+  
+          </mat-form-field>
+        </mat-grid-tile>
+  
+        <mat-grid-tile colspan="1">
+          <mat-form-field>
+            <mat-label>Action Taken</mat-label>
+            <mat-select [(value)]="actionID" class="full-width-select">
+              <mat-option value="0">--Action Taken --</mat-option>
+              <ng-container *ngFor="let option of actionsdata">
+                <mat-option [value]="option.code">{{ option.description }}</mat-option>
+              </ng-container>
+            </mat-select>
+          </mat-form-field>
+        </mat-grid-tile>
+  
+        <mat-grid-tile colspan="1">
+          <mat-form-field>
+            <mat-label>Email Subject</mat-label>
+            <input matInput [(ngModel)]="subject" name="subject">
+          </mat-form-field>
+        </mat-grid-tile>
+  
+        <mat-grid-tile colspan="1">
+          <mat-form-field>
+            <mat-label>Email Address</mat-label>
+            <input matInput [(ngModel)]="emailaddress" name="emailaddress">
+          </mat-form-field>
+        </mat-grid-tile>
+  
+        <mat-grid-tile colspan="1">
+          <button mat-flat-button style="margin-right: 5px;margin-bottom: 15px; color: #fff;background-color: #337AB7;border-color: #337AB7;" color="primary" (click)="clear()">Clear</button>
+          <button mat-flat-button style="margin-bottom: 15px; color: #fff;background-color: #337AB7;border-color: #337AB7;" color="primary" [disabled]="!isSearchEnabled()" (click)="search()">Search</button>
+        </mat-grid-tile>
+      
+
+
+      <mat-grid-tile colspan="4">
+        <div style="width: 100%;">
+          <table mat-table [dataSource]="activePageDataChunk" style=" border-bottom: 1px solid #ddd;">
+            <ng-container matColumnDef="workID">
+              <th mat-header-cell *matHeaderCellDef> Work ID </th>
+              <td mat-cell *matCellDef="let element">{{ element.workId }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="subject">
+              <th mat-header-cell *matHeaderCellDef> Subject Line </th>
+              <td mat-cell *matCellDef="let element">{{ element.subject }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="emailCategory">
+              <th mat-header-cell *matHeaderCellDef> Email Inbox </th>
+              <td mat-cell *matCellDef="let element">{{ element.emailCategory }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="emailSubCategory">
+              <th mat-header-cell *matHeaderCellDef> Email Inbox Category </th>
+              <td mat-cell *matCellDef="let element">{{ element.emailSubCategory }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="from">
+              <th mat-header-cell *matHeaderCellDef> From Email</th>
+              <td mat-cell *matCellDef="let element">{{ element.from }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="receivedDate">
+              <th mat-header-cell *matHeaderCellDef> Receive Date</th>
+              <td mat-cell *matCellDef="let element">{{ element.receivedDate }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="activityDate">
+              <th mat-header-cell *matHeaderCellDef> Worked Date </th>
+              <td mat-cell *matCellDef="let element">{{ element.activityDate }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="workStatus">
+              <th mat-header-cell *matHeaderCellDef> Action Taken </th>
+              <td mat-cell *matCellDef="let element">{{ element.workStatus }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="workedBy">
+              <th mat-header-cell *matHeaderCellDef> Worked By </th>
+              <td mat-cell *matCellDef="let element">{{ element.workedBy }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="dueDate">
+              <th mat-header-cell *matHeaderCellDef> Due Date </th>
+              <td mat-cell *matCellDef="let element">{{ element.dueDate }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="action">
+              <th mat-header-cell *matHeaderCellDef> Action </th>
+              <td mat-cell *matCellDef="let element">
+                <button mat-icon-button (click)="performAction(element)" matTooltip="Action"
+                  *ngIf="element.workStatus === 'Fresh' && !isViewOnlyMode">
+                  <mat-icon>play_arrow</mat-icon>
+                </button>
+                <button mat-icon-button (click)="viewDetails(element)" matTooltip="View"
+                  *ngIf="element.workStatus !== 'Fresh' || isViewOnlyMode">
+                  <mat-icon>visibility</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+
+
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let element; columns: displayedColumns;"></tr>
+          </table>
+          <div *ngIf="dataSource.length === 0" class="no-records" style="text-align: center;color: #73879C;box-sizing: border-box;">
+
+            No record found, Please select relevent search criteria
+
+          </div>
+        </div>
+      </mat-grid-tile>
+
+
+
+      <mat-grid-tile colspan="4">
+        <mat-paginator showFirstLastButtons [length]="dataSource.length" [pageSize]="pageSize"
+          [pageSizeOptions]="pageSizeOptions" [pageIndex]= "pageIndex"
+          (page)="onPageChanged($event)"></mat-paginator>
+      </mat-grid-tile>
+
+    </mat-grid-list>
+  </mat-dialog-content>
+  </div> -->
+ 

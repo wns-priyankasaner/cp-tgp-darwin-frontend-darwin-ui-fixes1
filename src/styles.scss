@@ -1,0 +1,168 @@
+@import "scss/dashboard";
+@import "scss/agent";
+
+
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: "calibri";
+}
+    //font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.mat-mdc-select .mat-mdc-option {
+    font-size: 14px;
+    font-family: "calibri";
+}
+
+.bg-whitesmoke{
+    background-color: whitesmoke;
+}
+
+
+app-sent-view-email-dialog{
+    .mat-mdc-form-field{
+        font-family: "calibri";
+        font-size: 14px;
+      }
+    
+      .mdc-text-field--filled:not(.mdc-text-field--disabled){
+        background-color: white;
+        font-family: "calibri";
+        font-size: 14px;
+        margin-top: 2rem;
+      }
+    
+      .mat-mdc-option{
+        font-family: "calibri";
+        font-size: 14px;
+      }
+}
+ 
+
+// .full-width-dialog .mat-dialog-container {
+//     max-width: 100vw !important;
+//   }
+
+#data-table>tbody>tr:nth-of-type(odd) {
+    background-color: #f9f9f9;
+}
+
+#data-table{
+  border:  1px solid #ddd;
+}
+
+div::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+
+div::-webkit-scrollbar-thumb {
+    background-color: #C2CDD8;
+    border-radius: 10px;
+    border: 4px solid #ffffff;
+    width: 5px;
+}
+
+
+div::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: #ffffff;
+    width: 5px;
+}
+
+// mat-form-field{
+//     height: 60px;
+// }
+
+// .mat-mdc-text-field-wrapper{
+//     height: 40px;
+// }
+
+// .mdc-text-field--no-label:not(.mdc-text-field--outlined):not(.mdc-text-field--textarea) .mat-mdc-form-field-infix{
+//  padding-top: 6px;
+// }
+
+
+.mat-mdc-select-placeholder {
+    color: #999!important;
+    letter-spacing: normal;
+        font-size: 13px;
+  }
+  input::placeholder {
+    /* Add your placeholder styles here */
+    color: #999; /* Placeholder text color */
+    letter-spacing: normal;
+    font-size: 11px!important;
+    
+  }
+  .mat-mdc-dialog-container .mdc-dialog__surface {
+    height: 92%!important;
+}
+ #mat-menu-panel-1.mat-mdc-menu-panel.mat-mdc-menu-panel {
+    position: absolute!important;
+    left: 100px;
+    top: -75px;
+    background: #1f64c7;
+    border-radius: 0;
+  }
+  #mat-menu-panel-1.mat-mdc-menu-panel.mat-mdc-menu-panel a span{color: #fff!important;font-size: 13px;}
+  .form-field-container mat-label {
+    font-size: 12px;
+      color: #73879c;
+      font-weight: 500;
+  }
+  
+ .mat-mdc-select, .text-input-field input, .mat-date-range-input, .form-control, .mat-datepicker-input, input[type="text"] {
+    border: 1px solid #ccc;
+    font-size: 13px!important;
+    padding: 2px 10px;
+    width: 100%;
+    margin-bottom: 5px;
+    color: #000;
+    box-sizing: border-box;background-color: #fff;
+  }
+  .form-control, input[type="text"]{padding: 7px 10px;}
+  .row.actionContainer .mat-datepicker-input {
+    padding: 7px 10px;
+    margin-top: 10px;
+}
+  mat-datepicker-toggle.mat-datepicker-toggle {
+    position: absolute;
+    right: 16px;
+    top: 42px;
+  }
+  mat-datepicker-toggle .mat-mdc-icon-button.mat-mdc-button-base {
+    width: auto;
+    height: auto;
+    padding: 0;
+    background-color: transparent;--mat-mdc-button-persistent-ripple-color: none;
+  }
+  mat-datepicker-toggle .mat-mdc-icon-button.mat-mdc-button-base svg {
+    vertical-align: baseline;
+    width: 18px;
+}
+
+button.search {
+  background: #73879C !important;
+  color: #fff !important;
+  border: #73879C;
+  text-align: center;
+  margin-right: 10px;
+  letter-spacing: normal; margin: 0 0 0 10px;
+}
+button.mat-primary.clear, button.primary-button {
+  color: #fff;
+  background-color: #337AB7;
+  border: #337AB7;
+  text-align: center;
+  letter-spacing: normal;margin: 0 0 0 10px;
+}
+button.primary-button {
+  padding: 10px 15px;
+  border-radius: 5px;
+  float: right;
+  position: relative;
+  padding-left: 40px;
+}
+.mat-mdc-table .mdc-data-table__header-row {
+  height: 44px;
+}

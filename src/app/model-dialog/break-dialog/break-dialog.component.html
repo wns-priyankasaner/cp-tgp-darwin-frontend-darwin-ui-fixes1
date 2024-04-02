@@ -1,0 +1,38 @@
+<div class="modal">
+  <div class="modal-content">
+    <h2 style="color:#73879C;">Impact Time</h2>
+    <div>
+      <div *ngIf="dialogState === 'start'">
+        StartTime: {{ formatTime(startTime) }}
+        <!-- Display the ongoing timer for the end time when isTimerRunning is true -->
+        <div *ngIf="isTimerRunning">EndTime: {{ formatTime(currentDateTime) }}{{ totalDuration ? ' (' + totalDuration +
+          ')' : '' }}</div>
+      </div>
+      <div *ngIf="dialogState === 'break'">
+        <div *ngIf="startTime">StartTime: {{ formatTime(startTime) }}</div>
+        <!-- Display the end time when the "End" button is clicked and the timer is not running -->
+        <div *ngIf="endTime && !isTimerRunning">EndTime: {{ formatTime(endTime) }}</div>
+        <div *ngIf="totalDuration">Duration: {{ totalDuration }}</div>
+      </div>
+      <div class="form-field-container">
+        <mat-label>Select Break</mat-label>
+        <mat-select [(value)]="selectedValue" class="full-width-select" (selectionChange)="onBreakSelectionChange()">
+          <mat-option *ngFor="let option of break" [value]="option.id">{{ option.category }}</mat-option>
+        </mat-select>
+
+      </div>
+      <div *ngIf="showValidationMessage" class="validation-message">Please select a Break before starting.</div>
+    </div>
+    <div class="custom-dialog-container">
+      <div class="form-field-container">
+        <textarea matInput [(ngModel)]="messageValue" rows="3"></textarea>
+      </div>
+    </div>
+    <div class="template-actions">
+      <button mat-button style="color: #fff;background-color: #34495E;border-color: #34495E;margin-right: 5px;" (click)="closeModal()" [disabled]="isCancelButtonDisabled">Cancel</button>
+      <button mat-raised-button color="primary" *ngIf="dialogState === 'break'" (click)="startBreak()">Start</button>
+      <button mat-raised-button color="warn" *ngIf="dialogState === 'start'" (click)="endBreak()">End</button>
+      
+    </div>
+  </div>
+</div>

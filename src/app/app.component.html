@@ -1,0 +1,135 @@
+<header>
+
+    <mat-toolbar class="toolbar-bg-white">
+      <button mat-icon-button (click)="opened = !opened" *ngIf="isUserLoggedIn"><mat-icon>menu</mat-icon></button>
+  
+      <img class="logo-final" src="assets/Images//logo-final.png" />
+      <span class="example-spacer"></span>
+  
+      <button mat-icon-button class="example-icon mat-clr-primary" (click)="login()"
+        aria-label="Example icon-button with share icon" *ngIf="!isUserLoggedIn">
+        <mat-icon class="mat-primary-icon">login</mat-icon>
+      </button>
+  
+      <button mat-icon-button *ngIf="isUserLoggedIn" [matMenuTriggerFor]="loginMenu" class="memberIcon">
+        <mat-icon>account_circle</mat-icon>
+    </button>
+    <mat-menu #loginMenu="matMenu">
+        <button mat-menu-item (click)="logout()">Log Out 
+           <mat-icon>exit_to_app</mat-icon>
+        </button>
+    </mat-menu>
+    
+    </mat-toolbar>
+  </header>
+  
+  
+  <!-- <mat-drawer-container class="example-container">
+    <mat-drawer mode="side" opened>Drawer content</mat-drawer>
+    <mat-drawer-content><router-outlet></router-outlet></mat-drawer-content>
+  </mat-drawer-container> -->
+  <mat-sidenav-container>
+    
+    <mat-sidenav [(opened)]="opened">
+      <!-- <mat-menu #appMenu="matMenu">
+      <button mat-menu-item [matMenuTriggerFor]="subMenu">Work Management</button>
+     </mat-menu> -->
+     <div class="sideNavMenu">
+      <div class="side-menu-img">
+        <i><img src="assets/Images/Workflow Management (1).png"> </i>
+      </div>
+      <a [matMenuTriggerFor]="workMenu" class="side-menu">
+  
+  
+        <span class="side-menu-text">Work Management</span></a>
+  
+      <mat-menu #workMenu="matMenu" xPosition="after">
+  
+        <a mat-menu-item routerLink="workmanagement" (click)="closeMenuBar()">Work Allocation</a>
+        <a mat-menu-item routerLink="reallocatcase" (click)="closeMenuBar()">Manual Reallocation</a>
+      </mat-menu>
+</div>
+      <div class="sideNavMenu">
+      <div class="side-menu-img">
+        <mat-icon class="custom-icon" style="width:100px;color: white;">bar_chart</mat-icon>
+      </div>
+      <a [matMenuTriggerFor]="dashboarMenu" class="side-menu">
+  
+  
+        <span class="side-menu-text">Performance Dashboard</span></a>
+  
+      <mat-menu #dashboarMenu="matMenu" xPosition="after">
+  
+        <a mat-menu-item routerLink="performancedashboard" (click)="closeMenuBar()">Business Performance</a>
+        <a mat-menu-item routerLink="insightdashboard" (click)="closeMenuBar()">Insight Dashboard</a>
+        <a mat-menu-item routerLink="tabulardashboard" (click)="closeMenuBar()">Tabular Dashboard</a>
+      </mat-menu>
+</div>
+      <div class="sideNavMenu">
+      <div class="side-menu-img">
+        <mat-icon class="custom-icon" style="width:100px;color: white;">storage</mat-icon>
+      </div>
+      <a class="side-menu">
+        
+        <span class="side-menu-text"  style="cursor: pointer;" (click)="closeMenuBar()"  routerLink="rawdata">Raw Data</span>
+      </a>
+</div>
+        <!-- <a mat-menu-item routerLink="rawdata">Raw data</a> -->
+        <div class="sideNavMenu">
+      <div class="side-menu-img">
+        <i><img src="assets/Images/User Management (1).png" style="width:50px;"> </i>
+      </div>
+      <a [matMenuTriggerFor]="userMenu" class="side-menu">
+  
+  
+        <span class="side-menu-text">User Management</span></a>
+  
+      <mat-menu #userMenu="matMenu" xPosition="after">
+  
+        <a mat-menu-item routerLink="skillmanagement" (click)="closeMenuBar()">Skillset Mapping</a>
+  
+      </mat-menu>
+</div>
+
+      <div class="sideNavMenu">
+      <div class="side-menu-img">
+        <mat-icon class="custom-icon" style="width:100px;color: white;">help</mat-icon>
+      </div>
+      <a [matMenuTriggerFor]="helpMenu" class="side-menu">
+        
+        <span class="side-menu-text">Help</span></a>
+        <mat-menu #helpMenu="matMenu" xPosition="after">
+  
+          <a mat-menu-item routerLink="darwindocument">Darwin Document</a>
+    
+        </mat-menu>
+</div>
+
+    </mat-sidenav>
+  
+  
+    <mat-sidenav-content>
+      <div [ngClass]="{'home-page': !isUserLoggedIn}"></div>
+  
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+  
+  
+  
+  
+  
+  
+  <footer *ngIf="!isUserLoggedIn">
+    <mat-toolbar class="toolbar-bg-white">
+  
+      <p class="footer-text" style="padding: 11px 0;">Copyright © 2019 | WNS (Holdings) Ltd. All rights reserved.</p>
+  
+      <p class="powered-by footer-text  text-right">
+        Powered By
+      <p></p>
+  
+      <img src="assets/Images//footer-logo.png" />
+      <p>
+    </mat-toolbar>
+  </footer>

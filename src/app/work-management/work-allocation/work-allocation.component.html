@@ -1,0 +1,508 @@
+<mat-grid-list cols="8" rowHeight="80px">
+  <app-loading-spinner [isLoading]="isLoading"></app-loading-spinner>
+  <div class="workAllocationContainer">
+    <mat-grid-tile><mat-card class="example-card">
+        <mat-card-header>
+          <mat-card-title>{{userProductivity?.caseCompleted}}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="card-content">
+          <span>Forwarded</span>
+        </mat-card-content>
+      </mat-card></mat-grid-tile>
+
+    <mat-grid-tile><mat-card class="example-card">
+        <mat-card-header>
+          <mat-card-title>{{userProductivity?.queryCases}}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="card-content">
+          <span>Query Raised</span>
+        </mat-card-content>
+      </mat-card></mat-grid-tile>
+
+    <mat-grid-tile><mat-card class="example-card">
+        <mat-card-header>
+          <mat-card-title>{{userProductivity?.holdCase}}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="card-content">
+          <span>Query Completed</span>
+        </mat-card-content>
+      </mat-card></mat-grid-tile>
+    <mat-grid-tile><mat-card class="example-card">
+        <mat-card-header>
+          <mat-card-title>{{userProductivity?.nfa}}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="card-content">
+          <span>Replied & NFA</span>
+        </mat-card-content>
+      </mat-card></mat-grid-tile>
+
+    <mat-grid-tile [matTooltip]="'RequestFurtherinfo 0\n' +
+    'Other 0\n' +
+    'Spam Email 0\n' +
+    'FutureDate 0\n' +
+    'Query Already Completed 0\n' +
+    'Support Escalation 0'" matTooltipClass="tooltip-multiline">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <mat-card-title>
+            {{sumValue}}
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="card-content">
+          <span>Req.info+Others</span>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile><mat-card class="example-card">
+        <mat-card-header>
+          <mat-card-title>{{userProductivity?.productiveHours}}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="card-content">
+          <span>Productive Hours</span>
+        </mat-card-content>
+      </mat-card></mat-grid-tile>
+
+    <mat-grid-tile
+      [matTooltip]="userProductivity?.breaksdDetail?.length > 0 ? getTooltipText(userProductivity.breaksdDetail) : 'Break not taken yet'">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <mat-card-title>{{userProductivity?.generalBreakHours}}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="card-content">
+          <span>Non-Productive Hrs</span>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile><mat-card class="example-card">
+        <mat-card-header>
+          <mat-card-title style="color: #337AB7;text-align: center;">{{userProductivity?.totHours}}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="card-content">
+          <span>Total Login Hours</span>
+        </mat-card-content>
+      </mat-card></mat-grid-tile>
+  </div>
+</mat-grid-list>
+
+<mat-grid-list cols="12" rowHeight="55px" class="allocationBox">
+  <mat-grid-tile [colspan]="12">
+
+    <div class="work-allocation wm-border">
+
+      <div class="work-allocation-heading">
+        <span>Auto Allocation</span>
+      </div>
+
+      <div class="button-container">
+
+        <button *ngIf="timerRunning" mat-flat-button class="btn btn-round btn-default je-btn bordered-button"
+          [ngStyle]="{'color': timerColor}">
+          <span>Actual AHT {{ displayTime }} / Target AHT 08:00</span>
+        </button>
+        <button mat-flat-button style="color:#1ABB9C" (click)="openSentViewDialog()" [disabled]="iscallnext"
+          class="btn btn-round btn-default je-btn bordered-button">
+          <mat-icon>email</mat-icon>
+          Sent View Email
+        </button>
+
+        <button class="btn btn-round btn-default je-btn bordered-button" mat-flat-button style="color:#1ABB9C;"
+          [disabled]="iscallnext" (click)="openComposeNewDialog()">
+          <mat-icon>email</mat-icon>
+          Compose Email
+        </button>
+
+        <button class="btn btn-round btn-default je-btn bordered-button" mat-flat-button style="color:#1ABB9C;"
+          [disabled]="iscallnext" (click)="openSearchDialog()">
+          <mat-icon>search</mat-icon>
+          Search
+        </button>
+
+        <button class="btn btn-round btn-default je-btn bordered-button" mat-flat-button style="color: #1ABB9C"
+          [disabled]="iscallnext" (click)="getnextwork()">
+          <mat-icon>chevron_right</mat-icon>
+          GetNextWork
+        </button>
+
+        <button class="btn btn-round btn-default je-btn bordered-button" mat-flat-button style="color:#1ABB9C;"
+          [disabled]="iscallnext" (click)="openBreakDialog()">
+          <mat-icon>hourglass_empty</mat-icon>
+          Break
+        </button>
+
+      </div>
+
+    </div>
+
+  </mat-grid-tile>
+
+</mat-grid-list>
+
+
+<mat-grid-list cols="12" [rowHeight]="400" class="workContainer">
+
+  <mat-grid-tile [colspan]="8">
+
+    <div class="work-allocation-sub wm-border">
+
+      <div class="email-subject-container">
+
+        <div class="email-subject align-left">
+          <span>{{workManagement?.subject}}</span>
+        </div>
+
+        <div class="mail-time align-right">
+          <span>{{workManagement?.receivedDate | date:"dd/MM/yyyy HH:mm"}}</span>
+        </div>
+
+      </div>
+    </div>
+
+
+    <div class="x_panel">
+      <!-- ng-show="IsCasePulled"-->
+      <div class="x_title email-sub-container">
+        <div class="row">
+          <div class="col-md-8 col-lg-8" style="display: none;">
+            <h4 class="email-sub">{{workManagement?.subject}}</h4>
+          </div>
+          <div class="col-md-4 col-lg-4">
+            <!-- <div class="mailTime">
+                      <p style="text-align:center">{{workManagement?.receivedDate | date:"dd/MM/yyyy HH:mm:ss"}}</p>
+                  </div> -->
+
+          </div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content rem-mt">
+        <!-- CONTENT MAIL -->
+        <div class="emailContainer">
+          <div class="sender-info">
+
+            <div class="fromContainer">
+              <h6>
+                From:&nbsp;&nbsp;{{workManagement.from }}
+              </h6>
+            </div>
+            <div class="replyContainer">
+
+
+              <span matTooltip="Reply" (click)="openReplyModal()"
+                [ngClass]="{ 'disabled-icon': incorrectTaggingNo }"><mat-icon>reply</mat-icon></span>
+              <span style="padding-left: 20px;" matTooltip="Reply_All" (click)="openReplyAllModal()"
+                [ngClass]="{ 'disabled-icon': incorrectTaggingNo }"><mat-icon>reply_all</mat-icon></span>
+              <span style="padding-left: 20px;" matTooltip="Forward" (click)="openForwardModal()"
+                [ngClass]="{ 'disabled-icon': incorrectTaggingNo }"><mat-icon>forward</mat-icon></span>
+
+
+            </div>
+          </div>
+          <div class="col-md-12">
+            <h6 class="emailTo">
+              To:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{workManagement.to}}
+              <!-- <a class="sender-dropdown" ng-click="showDetails()"><i class="fa fa-chevron-up" ng-class="{'fa fa-chevron-up': isopen, 'fa fa-chevron-down': !isopen}" ng-click="isopen=!isopen"></i></a> -->
+              <!-- <mat-icon>arrow downward</mat-icon> -->
+
+            </h6>
+          </div>
+          <div style="margin-top:-9px" style="display:none">
+            <!--ng-show="ShowMailDetails"-->
+            <div class="col-lg-1 col-md-1">
+              <h6 style="height:25px;overflow-y:auto;margin:0px" ng-show="workManagement.IsCc">
+                Cc:
+              </h6>
+            </div>
+            <div class="col-lg-11 col-md-11">
+              <h6 style="height:25px;overflow-y:auto;margin:0px" ng-show="workManagement.IsCc">
+                {{workManagement.cc}}<br />
+              </h6>
+            </div>
+            <div class="col-lg-1 col-md-1">
+              <h6 style="height:25px;overflow-y:auto;margin:0px" ng-show="WorkManagement.IsBCc">
+                BCc:
+              </h6>
+            </div>
+            <div class="col-lg-11 col-md-11">
+              <h6 style="height:25px;overflow-y:auto;margin:0px" ng-show="WorkManagement.IsBCc">
+                {{workManagement.bCc}}<br />
+              </h6>
+            </div>
+          </div>
+
+
+
+
+
+          <div class="view-mail" id="DivMailBody">
+            <div class="col-lg-12 col-sm-12 col-md-12" [innerHTML]='workManagement.body'></div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <!--end-->
+
+
+
+
+    <div class="email-body" style="overflow-x: auto; display:none;">
+      <!-- <span>Hello Good Morning</span> -->
+      <div><span [innerHTML]='workManagement.body'></span></div>
+    </div>
+
+  </mat-grid-tile>
+
+  <mat-grid-tile [colspan]="4">
+
+    <div class="work-allocation-form wm-border sentiment">
+
+      <div class="sentimentContent sentimentID">
+        <mat-grid-list cols="2" [rowHeight]="30" class="emailContainer">
+          <mat-grid-tile class="grid-tile">
+            <div class="form-group">Sentiment: <span>{{workManagement?.sentiment}}</span>
+
+
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile class="grid-tile">
+            <div class="form-group text-right">WorkID: <span>{{workManagement?.workID}}</span></div>
+          </mat-grid-tile>
+        </mat-grid-list>
+
+
+
+        <mat-grid-list cols="2" [rowHeight]="60" class="emailContainer">
+          <mat-grid-tile class="grid-tile">
+            <div class="dis-inline form-field">
+              <span class="dis-block frm-label">Email Inbox</span>
+              <div class="matformfield no-bottom-border">
+
+                <input matInput type="text" placeholder="Email Inbox" name="emailInbox" [disabled]="true"
+                  [(ngModel)]="workManagement.category">
+              </div>
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile class="grid-tile">
+            <div class="dis-inline form-field">
+              <span class="dis-block frm-label">Incorrect Tagging <span class="required-star">*</span></span>
+              <div class="matformfield">
+
+                <mat-select [(ngModel)]="incorrectTaggingNo" [disabled]="isFieldsDisabled"
+                  (selectionChange)="incorrectTaggingChanged($event.value)" required>
+                  <mat-option [value]="true">Yes</mat-option>
+                  <mat-option [value]="false">No</mat-option>
+                </mat-select>
+              </div>
+            </div>
+          </mat-grid-tile>
+
+        </mat-grid-list>
+
+        <mat-grid-list cols="2" [rowHeight]="60" class="emailContainer" [hidden]="showCategory">
+          <mat-grid-tile class="grid-tile">
+            <div class="dis-inline form-field">
+              <!-- <input matInput type="text" name="Email Inbox Category" [(ngModel)]="workManagement.subCategory"> -->
+              <span class="dis-block frm-label">Email Inbox Category</span>
+              <div class="matformfield">
+
+                <!-- <mat-label class="matlabel">Email Inbox Category</mat-label> -->
+                <input matInput type="text" name="EmailInboxCategory" [disabled]="true"
+                  [(ngModel)]="workManagement.subCategory" placeholder="Email Inbox Category">
+                <!-- [(ngModel)]="getNextWorkData.wmEmailInbox"> -->
+              </div>
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile class="grid-tile">
+            <div class="dis-inline form-field" *ngIf="incorrectTagging==false">
+              <span class="dis-block frm-label">Incorrect Email Category</span>
+              <div class="matformfield">
+
+
+                <mat-select [(ngModel)]="incorrectCategory" (selectionChange)="incorrectCategoryChanged($event.value)"
+                  placeholder="Incorrect Email Category">
+                  <mat-option [value]="false">No</mat-option>
+                  <mat-option [value]="true">Yes</mat-option>
+                </mat-select>
+              </div>
+            </div>
+          </mat-grid-tile>
+        </mat-grid-list>
+
+        <!-- <div class="row" [hidden]="showCategory">
+       
+
+
+       
+
+      </div> -->
+
+        <div class="row" *ngIf="workEmailLoaded && incorrectTagging==true">
+          <div class="dis-block">
+            <span class="dis-block frm-label">Email Inbox</span>
+            <mat-form-field class="matformfield">
+
+
+
+              <mat-select [(ngModel)]="emailInbox" name="emailInbox" (selectionChange)="emailInboxChange($event.value)">
+
+                <mat-option value="0"> All</mat-option>
+
+                <mat-option *ngFor="let Category of categories" [value]="Category.id">
+
+                  {{ Category.name }}
+
+                </mat-option>
+
+              </mat-select>
+
+            </mat-form-field>
+          </div>
+        </div>
+
+
+        <div class="row actionContainer" *ngIf="incorrectCategory==true">
+          <div class="dis-block">
+            <span class="dis-block frm-label">Email Inbox Category</span>
+            <div class="matformfield">
+
+
+
+              <mat-select [(ngModel)]="emailInboxCategory" name="emailInboxCategory"
+                (selectionChange)="emailInboxCategoryChange()">
+
+                <mat-option value="0"> All</mat-option>
+
+                <mat-option *ngFor="let subcategory of subcategories" [value]="subcategory.id">
+
+                  {{ subcategory.subcategory }}
+
+                </mat-option>
+
+              </mat-select>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="row actionContainer" *ngIf="!incorrectTagging">
+          <div class="dis-block">
+            <span class="dis-block frm-label">Action Taken <span class="required-star">*</span></span>
+            <div class="formFd">
+              <mat-select [(value)]="selectedValueaction" class="full-width-select" required placeholder="Action Taken">
+                <mat-option *ngFor="let option of actionsdata" [value]="option.id">{{ option.description }}</mat-option>
+              </mat-select>
+              </div>
+           
+          </div>
+        </div>
+        <div class="row actionContainer" *ngIf="selectedValueaction === 15">
+          <div class="dis-block">
+            <input matInput [matDatepicker]="picker" [min]="minDate" placeholder="Choose a date">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </div>
+        </div>
+        <div class="row actionContainer" *ngIf="!incorrectTagging && selectedValueaction != 21 && selectedValueaction != 13">
+          <div class="dis-block">
+            <span class="dis-block frm-label">Contact Type <span class="required-star">*</span></span>
+            <div class="formFd">
+
+              <mat-select [(value)]="selectedValue" required class="full-width-select"
+                [disabled]="contacttypeId !== null">
+                <mat-option *ngFor="let option of contacttypedata" [value]="option.description">{{ option.description
+                  }}</mat-option>
+              </mat-select>
+            </div>
+          </div>
+        </div>
+
+        <div class="row actionContainer"
+          *ngIf="!incorrectTagging && !showCategory && selectedValueaction !=21 && selectedValueaction!=13">
+          <div class="dis-block">
+            <span class="dis-block frm-label">Bulk Request <span class="required-star">*</span></span>
+            <div class="formFd">
+
+
+              <mat-select [(ngModel)]="bulkRequest" name="bulkRequest"
+                (selectionChange)="bulkRequestChanged($event.value)" required placeholder="Select Bulk Request">
+                <mat-option [value]="false">No</mat-option>
+                <mat-option [value]="true">Yes</mat-option>
+              </mat-select>
+            </div>
+          </div>
+        </div>
+
+        <div class="row actionContainer" *ngIf="!incorrectTagging && selectedValueaction !=21 && selectedValueaction!=13"
+          [hidden]="!showMPANandAccountNo">
+          <div class="dis-block">
+            <span class="dis-block frm-label">Account Number</span>
+            <div class="formFd">
+
+
+              <input matInput [(ngModel)]="accountno" type="text" (keypress)="onKeyPress($event)" maxlength="10"
+                placeholder="Account Number">
+            </div>
+          </div>
+
+          <div class="dis-block" *ngIf="selectedValueaction !=21 && selectedValueaction!=13">
+            <span class="dis-block frm-label">MPAN/MPRN?</span>
+            <div class="formFd">
+
+
+              <input matInput [(ngModel)]="Mpan" type="text" (keypress)="onKeyPress($event)" placeholder="MPAN">
+            </div>
+          </div>
+        </div>
+
+        <div class="row actionContainer" *ngIf="!incorrectTagging && selectedValueaction !=21 && selectedValueaction!=13"
+          [hidden]="!showNoofRequest">
+          <div class="dis-block">
+            <span class="dis-block frm-label">No. of Request</span>
+            <div class="formFd">
+
+
+              <input matInput type="text" (keypress)="onKeyPress($event)" maxlength="10" placeholder="No. Of Request">
+            </div>
+          </div>
+        </div>
+        <mat-grid-list cols="1" [rowHeight]="140" class="emailContainer commentContainer"
+          *ngIf="selectedValueaction!=21">
+          <mat-grid-tile class="grid-tile">
+            <div class="dis-block">
+              <span class="dis-block frm-label">Comment <span class="required-star">*</span></span>
+              <div class="dis-block">
+
+                <textarea required matInput [disabled]="isFieldsDisabled" [(ngModel)]="commentText"
+                  placeholder="Comment"></textarea>
+
+              </div>
+              <span style="color: grey;">500 Characters only</span>
+            </div>
+          </mat-grid-tile>
+        </mat-grid-list>
+        <!-- <div class="row wm-ddn" *ngIf="selectedValueaction!=21">
+        <div class="dis-block">
+          <span class="dis-block frm-label">Comment <span class="required-star">*</span></span>
+          <mat-form-field class="dis-block">
+           
+            <textarea required matInput [disabled]="isFieldsDisabled" [(ngModel)]="commentText"
+            placeholder="Comment"></textarea>
+
+          </mat-form-field>
+          <span style="color: grey;">500 Characters only</span>
+        </div>
+      </div> -->
+
+        <div class="row btnContainer">
+          <button mat-flat-button (click)="cancel()" class="cancelBtn">Cancel</button>
+          <button mat-flat-button class="mat-primary saveBtn" [disabled]="isFieldsDisabled"
+            (click)="savework()">Save</button>
+        </div>
+      </div>
+    </div>
+
+  </mat-grid-tile>
+
+</mat-grid-list>

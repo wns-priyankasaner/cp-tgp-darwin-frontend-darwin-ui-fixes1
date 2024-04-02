@@ -1,0 +1,149 @@
+<mat-grid-list cols="4" rowHeight="100px" class="filter">
+  <app-loading-spinner [isLoading]="isLoading"></app-loading-spinner>
+    
+    <mat-grid-tile class="filter">
+      <div class="formfield">
+        <mat-label>Select Email Inbox</mat-label>
+        <mat-select [(ngModel)]="emailInbox" name="emailInbox"
+                (selectionChange)="emailInboxChange($event.value)">
+                <mat-option [value]="0">All</mat-option>
+                <mat-option *ngFor="let Category of categories" [value]="Category.id">
+
+                    {{ Category.name }}
+
+
+                </mat-option>
+            </mat-select>
+      </div>
+  </mat-grid-tile>
+
+    <mat-grid-tile>
+        <div class="formfield">
+
+            <mat-label>Select Email Inbox Category</mat-label>
+            <mat-select [(ngModel)]="emailInboxCategory" name="emailInboxCategory"
+                (selectionChange)="emailInboxCategoryChange()">
+                <mat-option *ngFor="let subcategory of subcategories" [value]="subcategory.id">
+
+                    {{ subcategory.subcategory }}
+
+                </mat-option>
+            </mat-select>
+            
+          </div>
+       
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1">
+        <div class="formfield">
+            <mat-label>Select Month</mat-label>
+            <mat-select [(ngModel)]="month" name="emailSentMonth" (selectionChange)="updateGraph()">
+              <mat-option disabled="disabled">-Month-</mat-option>
+              <mat-option *ngFor="let monthOption of months; let i = index" [value]="i + 1">{{ monthOption }}</mat-option>
+            </mat-select>
+          </div>
+          
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1">
+        <div class="formfield">
+            <mat-label>Select Year</mat-label>
+            <mat-select [(ngModel)]="year" name="emailSentYear" (selectionChange)="updateGraphYear()">
+              <mat-option disabled="disabled">-Year-</mat-option>
+              <mat-option *ngFor="let yearOption of getYearRange()" [value]="yearOption">{{ yearOption }}</mat-option>
+            </mat-select>
+          </div>
+    </mat-grid-tile>
+   
+    
+</mat-grid-list>
+<mat-grid-list cols="5" rowHeight="72px" width="50px" style="margin-left: 5rem; margin-right: 7rem;">
+
+    <mat-grid-tile  class="dashboard-summary" style=" border: 2px solid white;background-color:white; justify-content: left !important;" matTooltip="Emails That have been completed (Excluding Un-attempted + Future Effective  + Support-Escalation) will be part of this report.">
+        <div class="tile-icon-title">
+          <img src="./assets/Images/ReceivedNew.png" alt="Received Icon" class="tile-image">
+        </div>
+        <div class="tile-content">
+          <h3 class="tile-heading">Received</h3>
+          <p class="tile-value">{{ receivedCount  }}</p>
+        </div>
+      </mat-grid-tile>
+      
+  
+    <mat-grid-tile   class="dashboard-summary"  style=" border: 2px solid white;" matTooltip="Emails That have been completed (Excluding Un-attempted + Future Effective  + Support-Escalation) will be part of this report.">
+      <!-- Summary tile for Completed -->
+      <mat-icon class="tile-icon">check_circle</mat-icon>
+      <div class="tile-content">
+        <h3 class="tile-heading">Completed</h3>
+        <p class="tile-value">{{ completedCount }}</p>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile  class="dashboard-summary"  style=" border: 2px solid white;background-color:whitesmoke;" matTooltip="Un-attempted + FutureDate + Support-Escalation Date emails will be part of this report and this report will always give the latest outstanding for all the email inboxes.">
+        <div class="tile-icon-title">
+          <img src="./assets/Images/Touched.png" alt="Received Icon" class="tile-image outstanding">
+        </div>
+        <div class="tile-content">
+          <h3 class="tile-heading">Outstanding</h3>
+          <p class="tile-value">{{ outstandingCount }}</p>
+        </div>
+        
+        
+      </mat-grid-tile>
+    
+    <mat-grid-tile  class="dashboard-summary"  style=" border: 2px solid white;background-color:whitesmoke;" matTooltip="Service level agreement to complete an email in expected time frame ">
+      <!-- Summary tile for Overall SLA -->
+      <mat-icon class="tile-icon">event</mat-icon>
+      <div class="tile-content">
+        <h3 class="tile-heading">Overall SLA</h3>
+        <p class="tile-value">{{ overallSLA | number:'1.1-1' }}%</p>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile  class="dashboard-summary"  style=" border: 2px solid white;background-color:whitesmoke;" matTooltip="Average handling time to complete 1 email">
+        <!-- Summary tile for Overall SLA -->
+        <mat-icon class="tile-icon">access_time</mat-icon>
+        <div class="tile-content">
+          <h3 class="tile-heading">AHT</h3>
+          <p class="tile-value">{{ averageAHT | number:'1.1-2' }}</p>
+        </div>
+      </mat-grid-tile>
+  </mat-grid-list>
+  
+
+
+
+<!-- <div style="text-align: center">
+
+    <h1>Bar Chart with Drilldown using Highcharts in Angular</h1>
+  
+    <app-bar-chart></app-bar-chart>
+  
+  </div> -->
+  <div class="listingBox">
+    <div class="scrollable-container">
+      <div class="row">
+        <div class="column">
+          <app-received-vs-completed [graphDataSource]="recievedVsCompletedGraph"></app-received-vs-completed>
+        </div>
+        <div class="column">
+          <app-outstanding-bar-graph [outstandingGraph]="outstandingGraph"></app-outstanding-bar-graph>
+        </div>
+      </div>
+      <div class="row">
+        <div class="column">
+          <app-sla-line-graph [slaLineGraph]="slaLineGraph"></app-sla-line-graph>
+        </div>
+        <div class="column">
+          <app-slabreakdown-bar-graph [slaBreakDownGraph]="slaBreakDownGraph"></app-slabreakdown-bar-graph>
+        </div>
+      </div>
+      <div class="row">
+        <div class="column">
+          <app-aht-line-graph [graphDataSource]="ahtLineGraph"></app-aht-line-graph>
+        </div>
+        <div class="column">
+          <app-hours-bar-graph [graphDataSource]="hoursGraph"></app-hours-bar-graph>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  
